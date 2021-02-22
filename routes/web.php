@@ -14,5 +14,17 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('frontend.index');
 });
+
+Route::get('category',function(){
+    return view('frontend.category');
+})->name('category');
+
+Route::get('single',function(){
+    return view('frontend.single');
+})->name('single');
+
+Route::get('dashboard',function(){
+    return view('backend.index');
+})->name('dashboard');

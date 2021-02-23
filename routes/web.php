@@ -26,3 +26,9 @@ Route::get('dashboard', [adminController::class,'index'])->name('dashboard');
 Route::get('viewCategory', [adminController::class,'viewCategory'])->name('viewCategory');
 
 Route::post('addCategory', [categoryController::class,'insertData'])->name('addCategory');
+
+Route::get('editCategory/{id}', [adminController::class,'editCategory'])->name('editCategory');
+
+Route::post('updateCategory/{id}', [categoryController::class,'updateCategory'])->name('updateCategory');
+
+Route::post('multipleDelete', [adminController::class,'multipleDelete'])->name('multipleDelete');

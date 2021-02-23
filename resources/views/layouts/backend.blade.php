@@ -8,6 +8,10 @@
 	<link rel="stylesheet" type="text/css" href="{{asset('css/ionicons.min.css')}}">
 	<link rel="stylesheet" type="text/css" href="{{asset('css/menu.css')}}">
 	<link rel="stylesheet" type="text/css" href="{{asset('css/backend-style.css')}}">
+  <script type="text/javascript" src="{{asset('js/jquery.min.js')}}"></script>
+  <script type="text/javascript" src="{{asset('js/bootstrap.min.js')}}"></script>
+  <script type="text/javascript" src="{{asset('js/app.min.js')}}"></script>
+  <script type="text/javascript" src="{{asset('js/backend-script.js')}}"></script>
 </head>
 <body>
 
@@ -74,6 +78,14 @@
             </ul>
         </li>
         <li class="treeview">
+            <a href="{{url('settings')}}">
+              <i class="fa fa-gear"></i> <span>Settings</span>
+              <span class="pull-right-container">
+                <i class="fa fa-angle-left pull-right"></i>
+              </span>
+            </a>
+        </li>
+        <li class="treeview">
             <a href="#">
               <i class="fa fa-user-plus"></i> <span>Users</span>
               <span class="pull-right-container">
@@ -112,10 +124,5 @@
 	</div>
 
 </footer>
-
-<script type="text/javascript" src="{{asset('js/jquery.min.js')}}"></script>
-<script type="text/javascript" src="{{asset('js/bootstrap.min.js')}}"></script>
-<script type="text/javascript" src="{{asset('js/app.min.js')}}"></script>
-<script type="text/javascript" src="{{asset('js/backend-script.js')}}"></script>
 </body>
 </html>

@@ -13,9 +13,9 @@
                 </div>
             @endif
             <h3>WebSite Settings</h3>
-			<form method="post" action="{{route('addSetting')}}">
+			<form method="post" action="{{route('addSetting')}}" enctype="multipart/form-data">
 				@csrf
-				<input type="hidden" name="lbl" value="{{encrypt('settings')}}" />
+				<input type="hidden" name="tbl" value="{{encrypt('settings')}}" />
                 <div class="form-group">
 					<label>Logo</label>
 					<input type="file" name="image" class="form-control">
@@ -29,7 +29,7 @@
 				<div id="socialFieldGroup">
 					<div class="form-group">
 						<label>Social</label>
-						<input type="url" name="url[]" class="form-control">
+						<input type="url" name="social[]" class="form-control">
 						<p class="text-muted">e.g. https://www.hello.com</p>
 					</div>
 				</div>
@@ -63,13 +63,13 @@
 <script>
 	var socialCounter = 1;
 	$('#addSocialField').click(function(){
-		sicialCounter++;
+		socialCounter++;
 		if(socialCounter > 5){
 			$('#socialAlert').removeClass('noshow');
 			return;
 		}
 		newDiv = $(document.createElement('div')).attr("class", "form-group");
-		newDiv.after().html('<input type="url" name="url[]" class="form-control"></div>');
+		newDiv.after().html('<input type="url" name="social[]" class="form-control"></div>');
 		newDiv.appendTo("#socialFieldGroup");
 	})
 </script>

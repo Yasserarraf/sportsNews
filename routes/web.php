@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\frontController;
 use App\Http\Controllers\adminController;
 use App\Http\Controllers\categoryController;
+use App\Http\Controllers\crudController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -38,7 +39,7 @@ Route::post('multipleDelete', [adminController::class,'multipleDelete'])->name('
 
 Route::get('settings', [adminController::class,'settings'])->name('settings');
 
-Route::post('addSetting', [adminController::class,'addSetting'])->name('addSetting');
+Route::post('addSetting', [crudController::class,'insertData'])->name('addSetting');
 
 
 

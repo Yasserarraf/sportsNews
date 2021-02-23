@@ -8,6 +8,11 @@
 	<link rel="stylesheet" type="text/css" href="css/ionicons.min.css">
 	<link rel="stylesheet" type="text/css" href="css/menu.css">
 	<link rel="stylesheet" type="text/css" href="css/style.css">	
+  <script type="text/javascript" src="js/jquery.min.js"></script>
+  <script type="text/javascript" src="js/bootstrap.min.js"></script>
+  <script type="text/javascript" src="js/app.min.js"></script>
+  <script type="text/javascript" src="js/script.js"></script>
+  <script type="text/javascript" src="js/sortable.js"></script>
 </head>
 <body>
 
@@ -72,6 +77,14 @@
               <li><a href="#"><i class="fa fa-eye"></i>All Reports</a></li>
               <li><a href="#"><i class="fa fa-plus-circle"></i>Add Reports</a></li>
             </ul>
+        </li>
+        <li class="treeview">
+            <a href="{{url('settings')}}">
+              <i class="fa fa-gear"></i> <span>Settings</span>
+              <span class="pull-right-container">
+                <i class="fa fa-angle-left pull-right"></i>
+              </span>
+            </a>
         </li>
         <li class="treeview">
             <a href="#">
@@ -233,11 +246,5 @@
 		<span class="pull-right">Version 2.2.3</span>
 	</div>
 </footer>
-
-<script type="text/javascript" src="js/jquery.min.js"></script>
-<script type="text/javascript" src="js/bootstrap.min.js"></script>
-<script type="text/javascript" src="js/app.min.js"></script>
-<script type="text/javascript" src="js/script.js"></script>
-<script type="text/javascript" src="js/sortable.js"></script>
 </body>
 </html>

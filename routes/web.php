@@ -27,8 +27,18 @@ Route::get('viewCategory', [adminController::class,'viewCategory'])->name('viewC
 
 Route::post('addCategory', [categoryController::class,'insertData'])->name('addCategory');
 
+
 Route::get('editCategory/{id}', [adminController::class,'editCategory'])->name('editCategory');
 
 Route::post('updateCategory/{id}', [categoryController::class,'updateCategory'])->name('updateCategory');
 
 Route::post('multipleDelete', [adminController::class,'multipleDelete'])->name('multipleDelete');
+
+//settings
+
+Route::get('settings', [adminController::class,'settings'])->name('settings');
+
+Route::post('addSetting', [adminController::class,'addSetting'])->name('addSetting');
+
+
+

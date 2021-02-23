@@ -26,3 +26,11 @@ Route::get('dashboard', [adminController::class,'index'])->name('dashboard');
 Route::get('viewCategory', [adminController::class,'viewCategory'])->name('viewCategory');
 
 Route::post('addCategory', [categoryController::class,'insertData'])->name('addCategory');
+
+//settings
+
+Route::get('settings', [adminController::class,'settings'])->name('settings');
+
+Route::post('addSetting', [adminController::class,'addSetting'])->name('addSetting');
+
+

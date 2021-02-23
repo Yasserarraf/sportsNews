@@ -15,4 +15,12 @@ class adminController extends Controller
            return view('backend.category',compact('data'));
        }
 
+       public function settings(){
+           $data = DB::table('settings')->first();
+           return view('backend.settings', ['data'=>$data]);
+       }
+
+       public function addSetting(Request $request){
+        return redirect()->back();
+       }
 }

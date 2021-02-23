@@ -42,9 +42,9 @@ class adminController extends Controller
         return redirect()->back();
     }
 
-       public function settings(){
+       public function getSettings(){
            $data = DB::table('settings')->first();
-           return view('backend.settings', ['data'=>$data]);
+           return view('backend.settings', compact('data'));
        }
 
        public function addSetting(Request $request){

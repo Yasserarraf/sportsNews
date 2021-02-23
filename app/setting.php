@@ -10,5 +10,5 @@ class setting extends Model
     use HasFactory;
 
     protected $table = "settings";
-    protected $primeryKey = 'sid'
+    protected $primeryKey = 'sid';
 }

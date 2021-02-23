@@ -78,7 +78,7 @@
             </ul>
         </li>
         <li class="treeview">
-            <a href="{{url('settings')}}">
+            <a href="{{route('getSettings')}}">
               <i class="fa fa-gear"></i> <span>Settings</span>
               <span class="pull-right-container">
                 <i class="fa fa-angle-left pull-right"></i>

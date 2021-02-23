@@ -1,7 +1,9 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\frontController;
+use App\Http\Controllers\adminController;
+use App\Http\Controllers\categoryController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -13,18 +15,14 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('frontend.index');
-});
+Route::get('/', [frontController::class,'index']);
 
-Route::get('category',function(){
-    return view('frontend.category');
-})->name('category');
+Route::get('category', [frontController::class,'category'])->name('category');
 
-Route::get('single',function(){
-    return view('frontend.single');
-})->name('single');
+Route::get('single', [frontController::class,'single'])->name('single');
 
-Route::get('dashboard',function(){
-    return view('backend.index');
-})->name('dashboard');
+Route::get('dashboard', [adminController::class,'index'])->name('dashboard');
+
+Route::get('viewCategory', [adminController::class,'viewCategory'])->name('viewCategory');
+
+Route::post('addCategory', [categoryController::class,'insertData'])->name('addCategory');

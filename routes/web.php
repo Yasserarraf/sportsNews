@@ -41,5 +41,7 @@ Route::get('getSettings', [adminController::class,'getSettings'])->name('getSett
 
 Route::post('addSetting', [crudController::class,'insertData'])->name('addSetting');
 
+Route::post('updateSettings/{id}', [crudController::class,'updateData'])->name('updateSettings');
+
 
 

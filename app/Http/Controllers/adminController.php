@@ -44,6 +44,11 @@ class adminController extends Controller
 
        public function getSettings(){
            $data = DB::table('settings')->first();
+           
+            if($data){
+                $data->social = explode(',',$data->social);
+            }
+
            return view('backend.settings', compact('data'));
        }
 

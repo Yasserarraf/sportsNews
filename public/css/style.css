@@ -1171,3 +1171,16 @@ ul {
     padding: 30px 0 50px;
     text-transform:uppercase;
 }
+
+/* social links */
+
+.social-icon{
+    background: #fff;
+    padding: 5px 10px;
+    color: #333;
+}
+
+.top-social{
+    padding-top: 10px;
+}
+

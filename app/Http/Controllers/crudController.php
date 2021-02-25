@@ -11,17 +11,21 @@ class crudController extends Controller
     public function insertData(Request $request){
         $data = $request->except(['_token']);
         $tbl = decrypt($data['tbl']);
+        unset($data['tbl']);
         $data['created_at'] = date('Y-m-d H:i:s');
 
+       
         if($request->has('social')){
             $data['social'] = implode(',', $data['social']);
         }
-
+       
         if($request->hasFile('image')){
             $data['image'] = $this->uploadImage($tbl, $data['image']);
         }
-
-        unset($data['tbl']);
+        if($request->has('category_id')){
+            $data['category_id']= implode(',',$data['category_id']);
+        } 
+     
         DB::table($tbl)->insert($data);
         session::flash('message','Data inserted successfully');
         return redirect()->back();

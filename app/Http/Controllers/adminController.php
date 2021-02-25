@@ -10,6 +10,34 @@ class adminController extends Controller
    public function index(){
            return view('backend.index');
        }
+       public function allPosts(){
+        $posts = DB::table('posts')->paginate(20);
+        foreach($posts as $post){
+            $categories= explode(',',$post->category_id);
+            foreach($categories as $cat){
+                $postcat=DB::table('categories')->where('cid',$cat)
+                ->value('title');
+                $postcategories[]=$postcat;
+                $postcat= implode(', ',$postcategories);
+            }
+
+            $post->category_id=$postcat;
+            $postcategories=[];
+        
+        }
+     
+        return view('backend.posts.all-posts' ,['posts'=>$posts]);
+    }
+    public function addPost(){
+        $categories= DB::table('categories')->get();
+        return view('backend.posts.add-post',['categories'=>$categories]);
+    }
+    public function editPost($id){
+        $data= DB::table('posts')->where('pid',$id)->first();
+        $postcat=explode(',',$data->category_id);
+        $categories = DB::table('categories')->get();
+        return view('backend.posts.edit',['data'=>$data, 'categories'=>$categories, 'postcat'=>$postcat]);
+    }
        public function viewCategory(){
            $data = DB::table('categories')->get();
            return view('backend.categories.category',compact('data'));
@@ -41,13 +69,4 @@ class adminController extends Controller
         session::flash('message','data deleted successfully ' );
         return redirect()->back();
     }
-
-       public function getSettings(){
-           $data = DB::table('settings')->first();
-           return view('backend.settings', compact('data'));
-       }
-
-       public function addSetting(Request $request){
-        return redirect()->back();
-       }
 }

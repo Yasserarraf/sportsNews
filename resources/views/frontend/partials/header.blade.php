@@ -25,7 +25,9 @@
 				<div class="row">
 		    	 	<div class="col-md-3">
 						<div class="logo">
-						<a  href="index.html"><img class="img-responsive" src="{{asset('img/logo.png')}}" alt=""></a>
+						@if($setting->image)
+						<a  href=""><img class="img-responsive" src="{{url('settings')}}/{{$setting->image}}" alt="logo" ></a>
+						@endif
 						</div><!--logo-->
 		    	 	</div><!--col-md-3-->
 
@@ -35,17 +37,11 @@
 						</div>
 		    	 	</div><!--col-md-6-->
 
-		    	 	<div class="col-md-3">
+		    	 	<div class="col-md-3 top-social">
 						<div class="social_icon1">
-								<a class="icons-sm fb-ic"><i class="fa fa-facebook"></i></a>
-								<!--Twitter-->
-								<a class="icons-sm tw-ic"><i class="fa fa-twitter"></i></a>
-								<!--Google +-->
-								<a class="icons-sm gplus-ic"><i class="fa fa-google-plus"> </i></a>
-								<!--Linkedin-->
-								<a class="icons-sm li-ic"><i class="fa fa-linkedin"> </i></a>
-								<!--Pinterest-->
-								<a class="icons-sm pin-ic"><i class="fa fa-pinterest"> </i></a>
+						@foreach($setting->social as $key=>$social)
+						<a href="{{$social}}" class="social-icon"><i class="fa fa-{{$icons[$key]}}"></i></a>
+						@endforeach
 						</div> <!--social_icon1-->
 		    	 	</div><!--col-md-3-->
 		    	</div> <!--row-->

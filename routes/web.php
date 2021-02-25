@@ -41,6 +41,7 @@ Route::get('getSettings', [adminController::class,'getSettings'])->name('getSett
 
 Route::post('addSetting', [crudController::class,'insertData'])->name('addSetting');
 
+
 Route::post('multipledelete','adminController@multipleDelete');
 
 //posts
@@ -49,4 +50,8 @@ Route::post('addpost','crudController@insertData');
 Route::get('all-posts','adminController@allPosts');
 Route::get('editpost/{id}','adminController@editPost');
 Route::post('updatepost/{id}','crudController@updateData');
+
+Route::post('updateSettings/{id}', [crudController::class,'updateData'])->name('updateSettings');
+
+
 

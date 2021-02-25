@@ -5,6 +5,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Sports</title>
+	
+    <link href="{{asset('css/font-awesome.min.min.css')}}" rel="stylesheet">
     <!-- Goole Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Oswald:400,700|Roboto:400,500" rel="stylesheet">
 
@@ -63,7 +65,8 @@
 					<div class="text_widget footer_widget">
 					<div class="footer_widget_title"><h2>About Sports Mag</h2></div>
 
-		         	<div class="footer_widget_content">Collaborativelyadministrate empowered marketsplug-and-play networks. Dynamic procrastinate after.marketsplug-and-play networks. Dynamic procrastinate users after. Dynamic procrastinateafter. marketsplug-and-play networks. Dynamic procrastinate users after...
+		         	<div class="footer_widget_content">
+					 <p>{{$setting->about}}</p>
 					</div>
 					</div><!--text_widget-->
 				</div><!--col-xs-3-->

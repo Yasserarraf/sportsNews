@@ -23,9 +23,9 @@ class adminController extends Controller
 
             $post->category_id=$postcat;
             $postcategories=[];
-        
+
         }
-     
+
         return view('backend.posts.all-posts' ,['posts'=>$posts]);
     }
     public function addPost(){
@@ -69,4 +69,22 @@ class adminController extends Controller
         session::flash('message','data deleted successfully ' );
         return redirect()->back();
     }
+
+
+
+
+       public function getSettings(){
+           $data = DB::table('settings')->first();
+
+            if($data){
+                $data->social = explode(',',$data->social);
+            }
+
+           return view('backend.settings', compact('data'));
+       }
+
+       public function addSetting(Request $request){
+        return redirect()->back();
+       }
 }
+

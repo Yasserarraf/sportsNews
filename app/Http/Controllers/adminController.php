@@ -86,5 +86,19 @@ class adminController extends Controller
        public function addSetting(Request $request){
         return redirect()->back();
        }
+
+       public function addAdv(){
+           return view('backend.advertisement.add-adv');
+       }
+
+       public function allAdv(){
+           $data = DB::table('advertisements')->orderby('aid', 'DESC')->get();
+           return view('backend.advertisement.all-adv',  compact('data'));
+       }
+
+       public function editAdv($id){
+        $data = DB::table('advertisements')->where('aid', $id)->first();
+        return view('backend.advertisement.edit-adv',  compact('data'));
+    }
 }
 

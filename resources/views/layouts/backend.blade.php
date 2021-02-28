@@ -58,6 +58,18 @@
             </ul>
         </li>
         <li class="treeview">
+            <a href="#">
+              <i class="fa fa-image"></i> <span>Advertisement</span>
+              <span class="pull-right-container">
+                <i class="fa fa-angle-left pull-right"></i>
+              </span>
+            </a>
+            <ul class="treeview-menu">
+              <li><a href="{{url('all-advs')}}"><i class="fa fa-eye"></i>All Advs</a></li>
+              <li><a href="{{url('add-adv')}}"><i class="fa fa-plus-circle"></i>Add Adv</a></li>
+            </ul>
+        </li>
+        <li class="treeview">
             <a href="menu.html">
               <i class="fa fa-file"></i> <span>Menu</span>
               <span class="pull-right-container">

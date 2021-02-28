@@ -115,11 +115,21 @@
 				</div><!--ad-->
 
 				<div class="ad">
-					<img class="img-responsive" src="{{asset('img/img-ad.jpg')}}" alt="img" />
+					<div class="col-sm-12">
+						@if($sidebarTop)
+						<!--  images are not showing ... need to fix ! -->
+						<a  href="{{$sidebarTop->url}}"><img class="img-responsive" src="{{url('advertisements')}}/{{$sidebarTop->image}}" alt=""></a>
+					</div>
+					@endif
 				</div>
 
 				<div class="ad">
-					<img class="img-responsive" src="{{asset('img/img-ad2.jpg')}}" alt="img" />
+					@if($sidebarBottom)
+					<div class="col-sm-12">
+						<!--  images are not showing ... need to fix ! -->
+						<a  href="{{$sidebarBottom->url}}"><img class="img-responsive" src="{{url('advertisements')}}/{{$sidebarBottom->image}}" alt=""></a>
+					</div>
+					@endif
 				</div>
 
                 <div class="most_comment">

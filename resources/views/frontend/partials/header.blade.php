@@ -33,7 +33,10 @@
 
 		    	 	<div class="col-md-6">
 						<div class="header_ad_banner">
-						<a  href="#"><img class="img-responsive" src="{{asset('img/img_ad.jpg')}}" alt=""></a>
+						@if($leaderboard)
+						<!--  images are not showing ... need to fix ! -->
+						<a  href="{{$leaderboard->url}}"><img class="img-responsive" src="{{url('advertisements')}}/{{$leaderboard->image}}" alt=""></a>
+						@endif
 						</div>
 		    	 	</div><!--col-md-6-->
 

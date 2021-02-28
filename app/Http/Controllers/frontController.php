@@ -23,9 +23,16 @@ class frontController extends Controller
             $icons = [];
         }
 
+        $leaderboard = DB::table('advertisements')->where('status', 'display')->where('location', 'leaderboard')->orderby('aid', 'DESC')->first();
+        $sidebarTop = DB::table('advertisements')->where('status', 'display')->where('location', 'sidebar-top')->orderby('aid', 'DESC')->first();
+        $sidebarBottom = DB::table('advertisements')->where('status', 'display')->where('location', 'sidebar-bottom')->orderby('aid', 'DESC')->first();
+        
         view()->share([
             'setting'=>$setting,
-            'icons'=>$icons
+            'icons'=>$icons,
+            'leaderboard' => $leaderboard,
+            'sidebarTop'=>$sidebarTop,
+            'sidebarBottom'=>$sidebarBottom
         ]);
     }
 

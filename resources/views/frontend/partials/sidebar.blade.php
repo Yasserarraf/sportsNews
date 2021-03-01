@@ -117,7 +117,6 @@
 				<div class="ad">
 					<div class="col-sm-12">
 						@if($sidebarTop)
-						<!--  images are not showing ... need to fix ! -->
 						<a  href="{{$sidebarTop->url}}" target="_blank"><img class="img-responsive" src="{{url('advertisements')}}/{{$sidebarTop->image}}" alt=""></a>
 					</div>
 					@endif
@@ -126,7 +125,6 @@
 				<div class="ad">
 					@if($sidebarBottom)
 					<div class="col-sm-12">
-						<!--  images are not showing ... need to fix ! -->
 						<a  href="{{$sidebarBottom->url}}" target="_blank"><img class="img-responsive" src="{{url('advertisements')}}/{{$sidebarBottom->image}}" alt=""></a>
 					</div>
 					@endif

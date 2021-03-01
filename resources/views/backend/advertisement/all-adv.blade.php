@@ -62,7 +62,9 @@
               <td>{{$adv->location}}</td>
               <td>
               <!--  images are not showing ... need to fix ! -->
-                <img src="{{url('advertisements')}}/{{$adv->image}}"alt="adv" width="200"/>
+                @if($adv->image)
+                <img src="{{url('advertisements')}}/{{$adv->image}}" alt="adv" width="200" />
+                @endif
               </td>              
               <td>{{$adv->status}}</td>              
             </tr>

@@ -1107,7 +1107,7 @@ ul {
     text-align: center;
     cursor: pointer;
     z-index: 333;
-    font-width:500;
+    font-weight:500;
 }
 .crunchify-top .fa{
     color:#fff;

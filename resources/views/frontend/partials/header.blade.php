@@ -35,7 +35,7 @@
 						<div class="header_ad_banner">
 						@if($leaderboard)
 						<!--  images are not showing ... need to fix ! -->
-						<a  href="{{$leaderboard->url}}"><img class="img-responsive" src="{{url('advertisements')}}/{{$leaderboard->image}}" alt=""></a>
+						<a  href="{{$leaderboard->url}}" target="_blank"><img class="img-responsive" src="{{url('advertisements')}}/{{$leaderboard->image}}" alt=""></a>
 						@endif
 						</div>
 		    	 	</div><!--col-md-6-->

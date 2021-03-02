@@ -57,9 +57,9 @@
 
 		    	 	<div class="col-md-3 top-social">
 						<div class="social_icon1">
-						<!--@foreach($setting->social as $key=>$social)
+						@foreach($setting->social as $key=>$social)
 						<a href="{{$social}}" class="social-icon"><i class="fa fa-{{$icons[$key]}}"></i></a>
-						@endforeach-->
+						@endforeach
 						</div> <!--social_icon1-->
 		    	 	</div><!--col-md-3-->
 		    	</div> <!--row-->
@@ -79,7 +79,7 @@
 				<div id="navbar" class="collapse navbar-collapse sidebar-offcanvas">
 				<ul class="nav navbar-nav">
 					@foreach($categories as $cat)
-					<li><a class="page-scroll" href="{{route('category',['slug'=>$cat->slug])}}">{{$cat->title}}</a></li>
+					<li><a class="page-scroll" href="{{route('singleCat',['slug'=>$cat->slug])}}">{{$cat->title}}</a></li>
                     @endforeach
 
 					<li class="dropdown">

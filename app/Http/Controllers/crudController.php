@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
+use App\Mail\NotificationSystem;
+use Illuminate\Support\Facades\Mail;
 
 class crudController extends Controller
 {
@@ -14,20 +16,28 @@ class crudController extends Controller
         unset($data['tbl']);
         $data['created_at'] = date('Y-m-d H:i:s');
 
-       
+
         if($request->has('social')){
             $data['social'] = implode(',', $data['social']);
         }
-       
+
         if($request->hasFile('image')){
             $data['image'] = $this->uploadImage($tbl, $data['image']);
         }
         if($request->has('category_id')){
             $data['category_id']= implode(',',$data['category_id']);
-        } 
-     
+        }
+
         DB::table($tbl)->insert($data);
         session::flash('message','Data inserted successfully');
+        $users = DB::table('users')->get();
+        if($tbl == "posts"){
+            foreach ($users as $user)
+            {
+                Mail::to($user->email)->send(new NotificationSystem());
+            }
+
+        }
         return redirect()->back();
     }
 

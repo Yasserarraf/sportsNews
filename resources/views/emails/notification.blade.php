@@ -1,12 +1,9 @@
 @component('mail::message')
-# Introduction
+# New Article was published
 
-The body of your message.
+Title : {{$data->title}}
 
-@component('mail::button', ['url' => ''])
-Button Text
-@endcomponent
 
-Thanks,<br>
+Thank you for using our App ,<br>
 {{ config('app.name') }}
 @endcomponent

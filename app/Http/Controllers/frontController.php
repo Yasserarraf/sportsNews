@@ -50,8 +50,9 @@ class frontController extends Controller
     }
     public function category($slug){
         $cat = DB::table('categories')->where('slug',$slug)->first();
-        $posts = DB::table('posts')->where('category_id','LIKE','%'.$cat->cid.'%')->get();
-        return view('frontend.category', ['posts'=>$posts,'cat'=>$cat]);
+        $posts = DB::table('posts')->where('category_id',$cat->cid)->get();
+
+        return view('frontend.category', compact('posts','cat'));
     }
     public function single(){
         return view('frontend.single');

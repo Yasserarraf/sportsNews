@@ -6,6 +6,7 @@ use App\Http\Controllers\adminController;
 use App\Http\Controllers\categoryController;
 use App\Http\Controllers\crudController;
 use App\Mail\NotificationSystem;
+use Illuminate\Support\Facades\Mail;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -23,7 +24,7 @@ Route::get('/', [frontController::class,'index'])->name('frontend');
 
 Route::get('/', [frontController::class,'index']);
 Route::get('article/{slug}','frontController@article');
-Route::get('category/{slug}','frontController@category');
+Route::get('category/{slug}','frontController@category')->name('singleCat');
 
 Route::get('category', [frontController::class,'category'])->name('category');
 
@@ -85,5 +86,6 @@ Route::post('updateadv/{id}', [crudController::class,'updateAdv'])->name('update
 
 //notification system
 Route::get('email',function(){
+    Mail::to('yasserarraf012@gmail.com')->send(new NotificationSystem());
     return new NotificationSystem();
 });

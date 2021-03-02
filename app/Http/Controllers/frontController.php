@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Session;
 class frontController extends Controller
 {
     public function __construct(){
+
         $categories = DB::table('categories')->where('status','on')->get();
         view()->share([
             'categories' => $categories,
@@ -30,7 +31,7 @@ class frontController extends Controller
         $leaderboard = DB::table('advertisements')->where('status', 'display')->where('location', 'leaderboard')->orderby('aid', 'DESC')->first();
         $sidebarTop = DB::table('advertisements')->where('status', 'display')->where('location', 'sidebar-top')->orderby('aid', 'DESC')->first();
         $sidebarBottom = DB::table('advertisements')->where('status', 'display')->where('location', 'sidebar-bottom')->orderby('aid', 'DESC')->first();
-        
+
         view()->share([
             'setting'=>$setting,
             'icons'=>$icons,

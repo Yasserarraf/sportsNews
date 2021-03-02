@@ -5,6 +5,7 @@ use App\Http\Controllers\frontController;
 use App\Http\Controllers\adminController;
 use App\Http\Controllers\categoryController;
 use App\Http\Controllers\crudController;
+use App\Mail\NotificationSystem;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -74,3 +75,9 @@ Route::get('all-advs', [adminController::class,'allAdv'])->name('allAdv');
 Route::get('editadv/{id}', [adminController::class,'editAdv'])->name('editAdv');
 Route::post('updateadv/{id}', [crudController::class,'updateAdv'])->name('updateAdv');
 
+
+
+//notification system
+Route::get('email',function(){
+    return new NotificationSystem();
+});

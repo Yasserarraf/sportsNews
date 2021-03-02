@@ -4,13 +4,13 @@
 				<div class="single_content_layout">
 					<div class="item feature_news_item">
 						<div class="item_img">
-							<img  class="img-responsive" src="{{asset('img/img-single.jpg')}}" alt="Chania">
+							<img  class="img-responsive" src="{{url('posts')}}/{{$data->image}}" alt="Chania">
 						</div><!--item_img-->
 							<div class="item_wrapper">
 								<div class="news_item_title">
-									<h2><a href="#">Leo Messi is boss of the bosses in football world.</a></h2>
+									<h2><a href="#">{{$data->title}}</a></h2>
 								</div><!--news_item_title-->
-								<div class="item_meta"><a href="#">20Aug- 2015,</a> by:<a href="#">Jhonson</a></div>
+								<div class="item_meta"><a href="#">{{$data->created_at}}</a> by:<a href="#">{{$data->slug}}</a></div>
 
                                     <span class="rating">
 										<i class="fa fa-star"></i>

@@ -21,12 +21,15 @@
 					<input type="hidden" name="tbl" value="{{encrypt('posts')}}">
 					<div class="col-sm-9">
 						<div class="form-group">	
+						   <label>Title </label>
 							<input type="text" name="title" id="post_title" class="form-control" placeholder="Enter title here">				
 						</div>	
                        <div class="form-group">	
+					        <label>Slug </label>
 							<input type="text" name="slug" id="slug" class="form-control" placeholder="Enter slug here">				
 						</div>						
-						<div class="form-group">		
+						<div class="form-group">	
+						    <label>Description </label>	
 							<textarea class="form-control" name="description"  rows="15" ></textarea>
 							<div class="col-sm-12 word-count">Word count: 0</div>
 						</div>	
@@ -67,7 +70,7 @@
 		</div>
 	</div>
 </div>
-<script src="{{url('public/ckeditor/ckeditor.js')}}"></script>
+<script src="{{url('ckeditor/ckeditor.js')}}"></script>
 <script>
 	CKEDITOR.replace('description', { "filebrowserBrowseUrl": "ckfinder\/ckfinder.html",
    "filebrowserImageBrowseUrl": "ckfinder\/ckfinder.html?type=Images",

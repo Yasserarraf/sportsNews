@@ -5,7 +5,7 @@
 				<div class="row">
 		    		<div class="col-md-6">
 						<div class="top_ber_left">
-							20 August. Thursday 2015. 2:00 PM.
+							20 August. Thursday 2021. 2:00 PM.
 						</div><!--top_ber_left-->
 		    		</div><!--col-md-6-->
 		    		<div class="col-md-6">

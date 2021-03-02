@@ -17,7 +17,8 @@ use App\Http\Controllers\crudController;
 */
 
 Route::get('/', [frontController::class,'index']);
-
+Route::get('article/{slug}','frontController@article');
+Route::get('category/{slug}','frontController@category');
 Route::get('category', [frontController::class,'category'])->name('category');
 
 Route::get('single', [frontController::class,'single'])->name('single');

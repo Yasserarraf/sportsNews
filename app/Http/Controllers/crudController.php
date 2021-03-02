@@ -45,7 +45,7 @@ class crudController extends Controller
 
         unset($data['tbl']);
         $data['created_at'] = date('Y-m-d H:i:s');
-        DB::table($tbl)->where('sid',$id)->update($data);
+        DB::table($tbl)->where('pid',$id)->update($data);
         session::flash('message','Data updated successfully');
         return redirect()->back();
     }

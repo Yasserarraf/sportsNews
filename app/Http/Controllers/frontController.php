@@ -30,12 +30,24 @@ class frontController extends Controller
     }
 
     public function index(){
-        return view('frontend.index');
+        $featured= DB::table('posts')->where('category_id', 'LIKE','%3%')->orderby('pid','DESC')->get();
+        $general= DB::table('posts')->where('category_id', 'LIKE','%4%')->orderby('pid','DESC')->get();
+        $tennis= DB::table('posts')->where('category_id', 'LIKE','%5%')->orderby('pid','DESC')->get();
+        $others= DB::table('posts')->where('category_id', 'LIKE','%6%')->orderby('pid','DESC')->get();
+        return view('frontend.index',['featured'=>$featured,'general'=>$general,'tennis'=>$tennis , 'others'=>$others]);
     }
-    public function category(){
-        return view('frontend.category');
+    public function category($slug){
+        $cat = DB::table('categories')->where('slug',$slug)->first();
+        $posts = DB::table('posts'->where('category_id','LIKE','%'.$cat->cid.'%')->get());
+        return view('frontend.category', ['posts'=>$posts,'cat'=>$cat]);
     }
     public function single(){
         return view('frontend.single');
+    }
+    public function article($slug){
+        $data = DB::table('posts')->where('slug',$slug)->first();
+        $category = explode(',',$data->category_id);
+        $category = $category[0];
+        return view('frontend.single',['data'=>$data]);
     }
 }

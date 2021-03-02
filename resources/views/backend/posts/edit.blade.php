@@ -21,13 +21,16 @@
 					<input type="hidden" name="tbl" value="{{encrypt('posts')}}">
           <input type="hidden" name="pid" value="{{$data->pid}}">
 					<div class="col-sm-9">
-						<div class="form-group">	
+						<div class="form-group">
+						    <label>Title </label>	
 							<input type="text" name="title" id="post_title" class="form-control" placeholder="Enter title here" value="{{$data->title}}">				
 						</div>	
-            <div class="form-group">	
+            <div class="form-group">
+			                <label>Slug </label>	
 							<input type="text" name="slug" id="slug" class="form-control" placeholder="Enter slug here" value="{{$data->slug}}">				
 						</div>						
-						<div class="form-group">		
+						<div class="form-group">	
+						    <label>Description </label>	
 							<textarea class="form-control" name="description"  rows="15" >{!!$data->description!!}</textarea>
 							<div class="col-sm-12 word-count">Word count: 0</div>
 						</div>	
@@ -57,12 +60,14 @@
 						<div class="content featured-image">
 							<h4>Featured Image <span class="pull-right"><i class="fa fa-chevron-down"></i></span></h4><hr>	
                            @if($data->image != '')
-                            <p><img id="output" style="max-width:100%"  [src="{{url('public/posts')}}/{{$data->image}}"/></p>
-							<input type="file" accept="image/*" name="image" id="file" onchange="loadFile(event)" style="display: none;">
-							<p>Replace Featured Image<label for="file" style="cursor: pointer;">Set Featured Image</label></p>	
+                            <p><img id="output" style="max-width:100%"  src="{{url('posts')}}/{{$data->image}}"/></p>
+							<p><input type="file" accept="image/*" name="image" id="file" onchange="loadFile(event)" style="display: none;"></p>
+							<p><label for="file" style="cursor: pointer;">
+							Replace Featured Image</label></p>
       			             @else
                            <p><img id="output" style="max-width:100%" /></p>
-							<input type="file" accept="image/*" name="image" id="file" onchange="loadFile(event)" style="display: none;">
+							<p><input type="file" accept="image/*" name="image" id="file" onchange="loadFile(event)" style="display: none;"></p>
+							<p><label for="file" style="cursor:pointer;">Ser Featured Image</label></p>
                             @endif
 						</div>
 					</div>
@@ -71,7 +76,7 @@
 		</div>
 	</div>
 </div>
-<script src="{{url('public/ckeditor/ckeditor.js')}}"></script>
+<script src="{{url('ckeditor/ckeditor.js')}}"></script>
 <script>
 	CKEDITOR.replace('description', { "filebrowserBrowseUrl": "ckfinder\/ckfinder.html",
    "filebrowserImageBrowseUrl": "ckfinder\/ckfinder.html?type=Images",

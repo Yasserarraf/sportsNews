@@ -19,7 +19,7 @@ class adminController extends Controller
            return view('backend.index');
        }
        public function allPosts(){
-        $posts = DB::table('posts')->paginate(20);
+        $posts = DB::table('posts')->orderby('pid','DESC')->paginate(20);
         foreach($posts as $post){
             $categories= explode(',',$post->category_id);
             foreach($categories as $cat){
@@ -33,8 +33,9 @@ class adminController extends Controller
             $postcategories=[];
 
         }
-
-        return view('backend.posts.all-posts' ,['posts'=>$posts]);
+        $published=DB::table('posts')->where('status','publish')->count();
+        $allposts= DB::table('posts')->count();
+        return view('backend.posts.all-posts' ,['posts'=>$posts,'published'=>$published, 'allposts'=>$allposts]);
     }
     public function addPost(){
         $categories= DB::table('categories')->get();

@@ -17,7 +17,13 @@ use App\Mail\NotificationSystem;
 |
 */
 
+
 Route::get('/', [frontController::class,'index'])->name('frontend');
+
+
+Route::get('/', [frontController::class,'index']);
+Route::get('article/{slug}','frontController@article');
+Route::get('category/{slug}','frontController@category');
 
 Route::get('category', [frontController::class,'category'])->name('category');
 

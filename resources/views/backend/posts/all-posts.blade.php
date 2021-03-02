@@ -22,14 +22,14 @@
       <div class="col-sm-3">
         <input type="text" id="search" name="search" class="form-control" placeholder="Search Posts">
       </div>
-    </div>  
+    </div>
 
     <div class="clearfix"></div>
     <form method="post" action="{{url('multipledelete')}}">
     <div class="filter-div">
       {{csrf_field()}}
       <input type="hidden" name="tbl" value="{{encrypt('posts')}}">
-      <input type="hidden" name="tblid" value="{{encrypt('pid')}}"> 
+      <input type="hidden" name="tblid" value="{{encrypt('pid')}}">
       <div class="col-sm-2">
           <select name="bulk-action" class="form-control">
             <option value="0">Bulk Action</option>
@@ -39,15 +39,15 @@
         <div class="col-sm-1">
           <div class="row">
             <button class="btn btn-default">Apply</button>
-          </div>  
+          </div>
         </div>
         <div class="filter-div">
       <div class="col-sm-3">
         {{$posts->links()}}
       </div>
-    </div> 
-    <div class="col-sm-12" ></div> 
-</form>
+    </div>
+    <div class="col-sm-12" ></div>
+
     <div class="col-sm-12">
       <div class="content">
         <table class="table table-striped" id="myTable">
@@ -64,28 +64,29 @@
             @foreach($posts as $post)
             <tr>
               <td>
-                <input type="checkbox" name="select-data[]" value="{{$post->pid}}"> 
+                <input type="checkbox" name="select-data[]" value="{{$post->pid}}">
                 <a href="{{url('editpost')}}/{{$post->pid}}">{{$post->title}}</a>
               </td>
               <td>{{$post->category_id}}</td>
               <td>{{$post->status}}</td>
-              <td>{{$post->created_at}}</td>              
+              <td>{{$post->created_at}}</td>
             </tr>
             @endforeach
             @else
             <tr>
               <td colspan="4">No posts Found. </td>
              </tr>
-            @endif     
+            @endif
           </tbody>
         </table>
       </div>
     </div>
-    <div class="clearfix"></div> 
+    <div class="clearfix"></div>
       <div class="col-sm-3 col-sm-offset-6">
 
       </div>
     </div>
+    </form>
   </div>
 </div>
 

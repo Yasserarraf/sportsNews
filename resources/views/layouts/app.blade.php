@@ -1,171 +1,83 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
+<!doctype html>
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<head>
     <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Sports</title>
-	
-    <link href="{{asset('css/font-awesome.min.min.css')}}" rel="stylesheet">
-    <!-- Goole Fonts -->
-    <link href="https://fonts.googleapis.com/css?family=Oswald:400,700|Roboto:400,500" rel="stylesheet">
 
-    <!-- Bootstrap -->
-    <link href="{{asset('css/bootstrap.min.css')}}" rel="stylesheet">
+    <!-- CSRF Token -->
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <!-- Font Awesome -->
-    <link href="{{asset('fonts/font-awesome/css/font-awesome.min.css')}}" rel="stylesheet">
+    <title>{{ config('app.name', 'Laravel') }}</title>
 
-    <!-- Owl carousel -->
-    <link href="{{asset('css/owl.carousel.css')}}" rel="stylesheet">
-	 <link href="{{asset('css/owl.theme.default.min.css')}}" rel="stylesheet">
+    <!-- Scripts -->
+    <script src="{{ asset('js/app.js') }}" defer></script>
 
-    <!-- Off Canvas Menu -->
-    <link href="{{asset('css/offcanvas.min.css')}}" rel="stylesheet">
+    <!-- Fonts -->
+    <link rel="dns-prefetch" href="//fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
 
-    <!--Theme CSS -->
-    <link href="{{asset('css/style.css')}}" rel="stylesheet">
-
-    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-    <![endif]-->
-  </head>
+    <!-- Styles -->
+    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+</head>
 <body>
-<div id="main-wrapper">
+    <div id="app">
+        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
+            <div class="container">
+                <a class="navbar-brand" href="{{ url('/') }}">
+                    {{ config('app.name', 'Laravel') }}
+                </a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
 
-  @include('frontend.partials.header')
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <!-- Left Side Of Navbar -->
+                    <ul class="navbar-nav mr-auto">
 
+                    </ul>
 
+                    <!-- Right Side Of Navbar -->
+                    <ul class="navbar-nav ml-auto">
+                        <!-- Authentication Links -->
+                        @guest
+                            @if (Route::has('login'))
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+                                </li>
+                            @endif
 
-    <main>
-    <section id="feature_category_section" class="feature_category_section section_wrapper">
-	<div class="container">
-		<div class="row">
-            <div class="col-md-9">
-                @yield('content')
+                            @if (Route::has('register'))
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+                                </li>
+                            @endif
+                        @else
+                            <li class="nav-item dropdown">
+                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                    {{ Auth::user()->name }}
+                                </a>
+
+                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" href="{{ route('logout') }}"
+                                       onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+                                        {{ __('Logout') }}
+                                    </a>
+
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                        @csrf
+                                    </form>
+                                </div>
+                            </li>
+                        @endguest
+                    </ul>
+                </div>
             </div>
-            <div class="col-md-3">
-                @include('frontend.partials.sidebar')
-            </div>
-        </div>
+        </nav>
+
+        <main class="py-4">
+            @yield('content')
+        </main>
     </div>
-    </main>
-
-
-
-    <!-- Footer Section -->
-    <footer class="footer_section section_wrapper section_wrapper" >
-	<div class="footer_top_section">
-		<div class="container">
-			<div class="row">
-				<div class="col-md-3">
-					<div class="text_widget footer_widget">
-					<div class="footer_widget_title"><h2>About Sports Mag</h2></div>
-
-		         	<div class="footer_widget_content">
-					 <p>{{$setting->about}}</p>
-					</div>
-					</div><!--text_widget-->
-				</div><!--col-xs-3-->
-
-				<div class="col-md-6">
-					<div class="footer_widget">
-                        <div class="footer_widget_title"><h2>Discover</h2></div>
-					    <div class="footer_menu_item ">
-						<div class="row">
-							<div class="col-sm-4">
-								<ul class="nav navbar-nav ">
-									<li><a href="../navbar/">Baseball</a></li>
-									<li><a href="../navbar-static-top/">Football</a></li>
-									<li><a href="./">Cricket</a></li>
-									<li><a href="../navbar/">Rugbi</a></li>
-									<li><a href="../navbar/">Hockey</a></li>
-									<li><a href="../navbar-static-top/">Boxing</a></li>
-									<li><a href="./">Golf</a></li>
-									<li><a href="../navbar/">Tennis</a></li>
-									<li><a href="../navbar/">Horse Racing</a></li>
-								</ul>
-						    </div><!--col-sm-4-->
-					        <div class="col-sm-4 ">
-								<ul class="nav navbar-nav  ">
-									<li><a href="../navbar/">Track & Field</a></li>
-									<li><a href="../navbar-static-top/">MembershipContact us</a></li>
-									<li><a href="./">Newsletter Alerts</a></li>
-									<li><a href="../navbar/">Podcast</a></li>
-									<li><a href="../navbar/">Blog</a></li>
-									<li><a href="../navbar-static-top/">SMS Subscription</a></li>
-									<li><a href="./">Advertisement Policy</a></li>
-									<li><a href="../navbar/">Jobs</a></li>
-								</ul>
-					        </div><!--col-sm-4-->
-					        <div class="col-sm-4">
-								<ul class="nav navbar-nav ">
-									<li><a href="../navbar/">Report technical issue</a></li>
-									<li><a href="../navbar-static-top/">Complaints & Corrections</a></li>
-									<li><a href="./">Terms & Conditions</a></li>
-									<li><a href="../navbar-static-top/">Privacy Policy</a></li>
-									<li><a href="./">Cookie Policy</a></li>
-									<li><a href="../navbar/">Securedrop</a></li>
-									<li><a href="../navbar/">Archives</a></li>
-								</ul>
-					        </div><!--col-sm-4-->
-				      	</div><!--row-->
-			      	</div><!--footer_menu_item-->
-                    </div><!--footer_widget-->
-				</div><!--col-xs-6-->
-
-				<div class="col-md-3">
- 					<div class="text_widget footer_widget">
-						<div class="footer_widget_title"><h2>Editor’s Message</h2></div>
-						<img src="{{asset('img/img-author.jpg')}}" />
-						<div class="footer_widget_content">Collaborativelyadministrate empowered marketsplug-and-play networks. Dynamic procrastinate after.marketsplug-and-play networks. Dynamic procrastinate users after. Dynamic procrastinateafter. marketsplug-and-play networks. Dynamic procrastinate users after...</div>
-					</div>
-				</div><!--col-xs-3-->
-			</div><!--row-->
-		</div><!--container-->
-	</div><!--footer_top_section-->
-	<a href="#" class="crunchify-top"><i class="fa fa-angle-up" aria-hidden="true"></i></a>
-
-	<div class="copyright-section">
-			<div class="container">
-				<div class="row">
-					<div class="col-md-3">
-							Editor: Joshep guinter Grunt
-					</div><!--col-xs-3-->
-					<div class="col-md-6">
-						<div class="copyright">
-						© Copyright 2015 - Sports News Mag.com. Design by: <a href="https://uiCookies.com" title="uiCookies">uiCookies</a>
-						</div>
-					</div><!--col-xs-6-->
-					<div class="col-md-3">
-						Sports News Magazine
-					</div><!--col-xs-3-->
-				</div><!--row-->
-			</div><!--container-->
-		</div><!--copyright-section-->
-</footer>
-
-</div> <!--main-wrapper-->
-
-<!-- Include all compiled plugins (below), or include individual files as needed -->
-<script src="{{asset('js/jquery.min.js')}}"></script>
-
-<!-- Owl carousel -->
-<script src="{{asset('js/owl.carousel.js')}}"></script>
-
-<!-- Bootstrap -->
-<script src="{{asset('js/bootstrap.min.js')}}"></script>
-
-<!-- Theme Script File-->
-<script src="{{asset('js/script.js')}}"></script>
-
-<!-- Off Canvas Menu -->
-<script src="{{asset('js/offcanvas.min.js')}}"></script>
-
-
-
 </body>
 </html>

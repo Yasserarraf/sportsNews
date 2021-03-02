@@ -2,7 +2,8 @@
 <html>
 <head>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>ADMIN DASHBOARD | WEBSITE NAME</title>
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <title>ADMIN DASHBOARD | WEBSITE NAME</title>
 	<link rel="stylesheet" type="text/css" href="{{asset('css/bootstrap.min.css')}}">
 	<link rel="stylesheet" type="text/css" href="{{asset('css/font-awesome.min.css')}}">
 	<link rel="stylesheet" type="text/css" href="{{asset('css/ionicons.min.css')}}">
@@ -17,7 +18,7 @@
 
 <div class="sidebar">
 	<ul class="sidebar-menu">
-		<li><a href="index.html" class="dashboard"><i class="fa fa-tachometer"></i> <span>Dashboard</span></a></li>
+		<li><a href="{{route('dashboard')}}" class="dashboard"><i class="fa fa-tachometer"></i> <span>Dashboard</span></a></li>
 		<li class="treeview">
             <a href="#">
               <i class="fa fa-bookmark-o"></i> <span>Posts</span>
@@ -57,26 +58,8 @@
               <li><a href="#"><i class="fa fa-plus-circle"></i>Add Pages</a></li>
             </ul>
         </li>
-        <li class="treeview">
-            <a href="menu.html">
-              <i class="fa fa-file"></i> <span>Menu</span>
-              <span class="pull-right-container">
-                <i class="fa fa-angle-left pull-right"></i>
-              </span>
-            </a>
-        </li>
-        <li class="treeview">
-            <a href="#">
-              <i class="fa fa-bar-chart"></i> <span>Reports</span>
-              <span class="pull-right-container">
-                <i class="fa fa-angle-left pull-right"></i>
-              </span>
-            </a>
-            <ul class="treeview-menu">
-              <li><a href="#"><i class="fa fa-eye"></i>All Reports</a></li>
-              <li><a href="#"><i class="fa fa-plus-circle"></i>Add Reports</a></li>
-            </ul>
-        </li>
+
+
         <li class="treeview">
             <a href="{{route('getSettings')}}">
               <i class="fa fa-gear"></i> <span>Settings</span>
@@ -87,14 +70,14 @@
         </li>
         <li class="treeview">
             <a href="#">
-              <i class="fa fa-user-plus"></i> <span>Users</span>
-              <span class="pull-right-container">
+                <i class="fa fa-user-plus"></i> <span>Users</span>
+                <span class="pull-right-container">
                 <i class="fa fa-angle-left pull-right"></i>
               </span>
             </a>
             <ul class="treeview-menu">
-              <li><a href="#"><i class="fa fa-eye"></i>All Users</a></li>
-              <li><a href="#"><i class="fa fa-plus-circle"></i>Add Users</a></li>
+                <li><a href="{{route('users')}}"><i class="fa fa-eye"></i>All Users</a></li>
+                <li><a href="#"><i class="fa fa-plus-circle"></i>Add Users</a></li>
             </ul>
         </li>
         <li class="treeview">
@@ -106,7 +89,7 @@
             </a>
             <ul class="treeview-menu">
               <li><a href="#"><i class="fa fa-edit"></i>Edit Profile</a></li>
-              <li><a href="login.html"><i class="fa fa-power-off"></i>Log Out</a></li>
+              <li><a href="{{route('logout')}}"><i class="fa fa-power-off"></i>Log Out</a></li>
             </ul>
         </li>
 	</ul>

@@ -5,16 +5,32 @@
 				<div class="row">
 		    		<div class="col-md-6">
 						<div class="top_ber_left">
-							20 August. Thursday 2015. 2:00 PM.
+                            {{date('l , M d, Y')}}
 						</div><!--top_ber_left-->
 		    		</div><!--col-md-6-->
 		    		<div class="col-md-6">
 		    			<div class="top_ber_right">
 		    				<div class="top-menu">
+                                @guest
+
 		    					<ul class="nav navbar-nav">
-			                        <li><a href="#">Login</a></li>
-			                        <li><a href="#">Register</a></li>
+			                        <li><a href="{{route('login')}}">Login</a></li>
+			                        <li><a href="{{route('register')}}">Register</a></li>
 	                    		</ul>
+                                @else
+
+                                    <ul class="nav navbar-nav">
+                                        <li>{{ Auth::user()->name }}</li>
+                                    </ul>
+                                @if(Auth::user()->hasRole('admin'))
+                                    <ul class="nav navbar-nav">
+                                        <li><a href="{{route('dashboard')}}">Dashboard</a></li>
+                                    </ul>
+                                    @else
+                                        <li><a href="{{route('logout')}}">logout</a></li>
+                                    @endif
+
+                                @endguest
 		    				</div><!--top-menu-->
 		    			</div><!--top_ber_left-->
 		    		</div><!--col-md-6-->
@@ -26,7 +42,7 @@
 		    	 	<div class="col-md-3">
 						<div class="logo">
 						@if($setting->image)
-						<a  href=""><img class="img-responsive" src="{{url('settings')}}/{{$setting->image}}" alt="logo" ></a>
+						<a  href=""><img class="img-responsive logo-img" src="{{url('settings')}}/{{$setting->image}}" alt="logo" ></a>
 						@endif
 						</div><!--logo-->
 		    	 	</div><!--col-md-3-->
@@ -39,9 +55,9 @@
 
 		    	 	<div class="col-md-3 top-social">
 						<div class="social_icon1">
-						@foreach($setting->social as $key=>$social)
+						<!--@foreach($setting->social as $key=>$social)
 						<a href="{{$social}}" class="social-icon"><i class="fa fa-{{$icons[$key]}}"></i></a>
-						@endforeach
+						@endforeach-->
 						</div> <!--social_icon1-->
 		    	 	</div><!--col-md-3-->
 		    	</div> <!--row-->
@@ -60,16 +76,9 @@
 				</div>
 				<div id="navbar" class="collapse navbar-collapse sidebar-offcanvas">
 				<ul class="nav navbar-nav">
-					<li class="hidden"><a href="#page-top"></a></li>
-					<li><a class="page-scroll" href="{{route('category')}}">Baseball</a></li>
-					<li><a class="page-scroll" href="{{route('category')}}">Football</a></li>
-					<li><a class="page-scroll" href="{{route('category')}}">Hockey</a></li>
-					<li><a class="page-scroll" href="{{route('category')}}">Basketball</a></li>
-					<li><a class="page-scroll" href="{{route('category')}}">Boxing</a></li>
-					<li><a class="page-scroll" href="{{route('category')}}">Golf</a></li>
-					<li><a class="page-scroll" href="{{route('category')}}">Tennis</a></li>
-					<li><a class="page-scroll" href="{{route('category')}}">Horse racing</a></li>
-					<li><a class="page-scroll" href="{{route('category')}}">Track & Field</a></li>
+					@foreach($categories as $cat)
+					<li><a class="page-scroll" href="{{route('category',['slug'=>$cat->slug])}}">{{$cat->title}}</a></li>
+                    @endforeach
 
 					<li class="dropdown">
 						<a href="#" class="dropdown-toggle" data-toggle="dropdown">More <b class="caret"></b></a>

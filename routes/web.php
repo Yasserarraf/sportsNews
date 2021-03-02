@@ -16,7 +16,7 @@ use App\Http\Controllers\crudController;
 |
 */
 
-Route::get('/', [frontController::class,'index']);
+Route::get('/', [frontController::class,'index'])->name('frontend');
 
 Route::get('category', [frontController::class,'category'])->name('category');
 
@@ -52,6 +52,12 @@ Route::get('editpost/{id}','adminController@editPost');
 Route::post('updatepost/{id}','crudController@updateData');
 
 Route::post('updateSettings/{id}', [crudController::class,'updateData'])->name('updateSettings');
+Route::get('users','adminController@getUsers')->name('users');
 
 
 
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Route::get('logout',[App\Http\Controllers\HomeController::class, 'logout'])->name('logout');

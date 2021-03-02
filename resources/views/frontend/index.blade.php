@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.frontend')
 @section('content')
 
 		   		<div class="category_layout">
@@ -173,7 +173,7 @@
 									</div><!--item_img-->
 									<div class="item_title_date">
 										<div class="news_item_title">
-											<h2><a href="#">Leo Messi is boss of the bosses of the football world.</a></h3>
+											<h2><a href="#">Leo Messi is boss of the bosses of the football world.</a></h2>
 										</div><!--news_item_title-->
                                         <div class="item_meta"><a href="#">20Aug- 2015,</a> by:<a href="#">Jhonson</a></div>
 									</div><!--item_title_date-->

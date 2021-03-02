@@ -44,7 +44,7 @@
 				<div class="form-group">
 					<div class="alert alert-danger alert-dismissable noshow socialAlert">
 						<a href="#" class="close" data-dismiss="alert">$times;</a>
-						<stron>Sorry !</stron g> you reached the social fields limit.
+						<strong>Sorry !</strong> you reached the social fields limit.
 					</div>
 				</div>
 
@@ -108,7 +108,7 @@
 				<div class="form-group">
 					<div class="alert alert-danger alert-dismissable noshow socialAlert">
 						<a href="#" class="close" data-dismiss="alert">&times;</a>
-						<stron>Sorry !</stron g> you reached the social fields limit.
+						<strong>Sorry !</strong> you reached the social fields limit.
 					</div>
 				</div>
 

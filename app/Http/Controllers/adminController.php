@@ -5,8 +5,16 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
+use mysql_xdevapi\Table;
+
 class adminController extends Controller
 {
+
+    public function __construct(){
+        $this->middleware('auth');
+    }
+
+
    public function index(){
            return view('backend.index');
        }
@@ -85,6 +93,11 @@ class adminController extends Controller
 
        public function addSetting(Request $request){
         return redirect()->back();
+       }
+
+       public function getUsers(){
+        $users = DB::table('users')->get();
+        return view('backend.users',compact('users'));
        }
 }
 

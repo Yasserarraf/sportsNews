@@ -127,7 +127,7 @@ ul {
     content: "";
 }
 .top_ber .navbar-nav > li:last-child:before{
-    content: "/";
+    content: "";
     float: left;
     padding-top: 5px;
     padding-bottom: 5px;
@@ -195,8 +195,14 @@ ul {
 /* --------------------
    Header Section
    -------------------*/
+.logo-img{
+    border-radius: 50%;
+    width: 80px;
+    height: 80px;
+}
 .header-section .logo{
-    padding-top: 10px;
+    /*padding-top: 10px;*/
+
 }
 .header-section .social_icon1{
     padding-top: 25px;
@@ -535,7 +541,7 @@ ul {
     }
     .item_img img{
         display: block;
-  width: 100%;
+         width: 100%;
         margin:0 auto;
         border-bottom:1px solid #fff;
     }

@@ -41,6 +41,7 @@ Route::get('getSettings', [adminController::class,'getSettings'])->name('getSett
 
 Route::post('addSetting', [crudController::class,'insertData'])->name('addSetting');
 
+Route::post('updateSettings/{id}', [crudController::class,'updateData'])->name('updateSettings');
 
 Route::post('multipledelete','adminController@multipleDelete');
 
@@ -51,8 +52,13 @@ Route::get('all-posts','adminController@allPosts');
 Route::get('editpost/{id}','adminController@editPost');
 Route::post('updatepost/{id}','crudController@updateData');
 
+
 Route::post('updateSettings/{id}', [crudController::class,'updateData'])->name('updateSettings');
 Route::get('users','adminController@getUsers')->name('users');
+
+
+
+//advertisement
 
 
 
@@ -61,3 +67,10 @@ Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::get('logout',[App\Http\Controllers\HomeController::class, 'logout'])->name('logout');
+
+Route::get('add-adv', [adminController::class,'addAdv'])->name('addAdv');
+Route::post('addadv', [crudController::class,'insertData']);
+Route::get('all-advs', [adminController::class,'allAdv'])->name('allAdv');
+Route::get('editadv/{id}', [adminController::class,'editAdv'])->name('editAdv');
+Route::post('updateadv/{id}', [crudController::class,'updateAdv'])->name('updateAdv');
+

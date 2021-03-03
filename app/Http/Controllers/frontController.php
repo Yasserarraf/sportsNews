@@ -59,8 +59,27 @@ class frontController extends Controller
     }
     public function article($slug){
         $data = DB::table('posts')->where('slug',$slug)->first();
-        $category = explode(',',$data->category_id);
-        $category = $category[0];
+        
         return view('frontend.single',['data'=>$data]);
+    }
+    
+    public function searchContent(){
+        print_r("works");
+        $url='http://127.0.0.1:8000/article';
+        $text = $_GET['value'];
+        $dat = DB::table('posts')->where('title','LIKE','%'.$text.'%')->orwhere('description','LIKE','%'.$text.'%')->get();
+        $output= '';
+        echo '<ul classe="search-result">';
+           if(count($data) > 0){
+               foreach($data as $d){
+                echo '<li><a href=""'.$url.'/'.$d->slug.'">'.$d->title.'</a></li>';
+                return 1;
+               }
+           }else{
+                echo '<li><a>Sorry! No data found.</a></li>';
+                return 0;
+            }
+            echo '</ul>';
+        return $output;
     }
 }

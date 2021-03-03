@@ -19,15 +19,19 @@
 	                    		</ul>
                                 @else
 
-                                    <ul class="nav navbar-nav">
-                                        <li>{{ Auth::user()->name }}</li>
-                                    </ul>
+                                  
                                 @if(Auth::user()->hasRole('admin'))
                                     <ul class="nav navbar-nav">
+									    <li><a href="#">{{ Auth::user()->name }}</a></li>
                                         <li><a href="{{route('dashboard')}}">Dashboard</a></li>
+										<li><a href="{{route('logout')}}">logout</a></li>
                                     </ul>
                                     @else
-                                        <li><a href="{{route('logout')}}">logout</a></li>
+									<ul class="nav navbar-nav">
+									   <li><a href="#">{{ Auth::user()->name }}</a></li>
+										<li><a href="{{route('logout')}}">logout</a></li>
+                                    </ul>
+                                   
                                     @endif
 
                                 @endguest
@@ -42,7 +46,7 @@
 		    	 	<div class="col-md-3">
 						<div class="logo">
 						@if($setting->image)
-						<a  href=""><img class="img-responsive logo-img" src="{{url('settings')}}/{{$setting->image}}" alt="logo" ></a>
+						<a  href=""><img class="img-responsive " src="{{url('settings')}}/{{$setting->image}}" alt="logo" ></a>
 						@endif
 						</div><!--logo-->
 		    	 	</div><!--col-md-3-->
@@ -82,27 +86,48 @@
 					<li><a class="page-scroll" href="{{route('singleCat',['slug'=>$cat->slug])}}">{{$cat->title}}</a></li>
                     @endforeach
 
-					<li class="dropdown">
-						<a href="#" class="dropdown-toggle" data-toggle="dropdown">More <b class="caret"></b></a>
-						<ul class="dropdown-menu">
-							<li><a href="#">Action</a></li>
-							<li><a href="#">Another action</a></li>
-							<li><a href="#">Something else here</a></li>
-						</ul>
-					</li>
+					
 				</ul>
 				<div class="pull-right">
 					<form class="navbar-form" role="search">
 						<div class="input-group">
-							<input class="form-control" placeholder="Search" name="q" type="text">
+							<input class="form-control" id="search-content" placeholder="Search"  name="q" type="text">
 							<div class="input-group-btn">
 								<button class="btn btn-default" type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
 							</div>
 						</div>
-					</form>
+					</form>@csrf
 				</div>
 				</div>
 			</div>
 		</nav>
 		<!-- .navbar -->
+		<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+
+      <script>
+      $(document).ready(function(){
+         
+
+          $("#search-content").keyup(function () {
+              var that = this,
+              value = $(this).val();
+			  console.log(value);
+		   if(value.length < 1 ){
+			$('#search-output').hide();
+              return false;
+		}else{
+			 $.ajax({
+				 type : "get",
+				 url : "{{route('search-content')}}",
+				 data : {'value':value},
+				 success:function(res){
+					 $('#search-output').show();
+					 $('#search-output').html(res);
+				 }
+			 })
+		}
+          
+          });
+      });
+  </script>
 	</header>

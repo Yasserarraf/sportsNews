@@ -21,8 +21,6 @@ use Illuminate\Support\Facades\Mail;
 
 Route::get('/', [frontController::class,'index'])->name('frontend');
 
-
-Route::get('/', [frontController::class,'index']);
 Route::get('article/{slug}','frontController@article');
 Route::get('category/{slug}','frontController@category')->name('singleCat');
 
@@ -62,8 +60,10 @@ Route::post('updatepost/{id}','crudController@updateData');
 
 
 Route::post('updateSettings/{id}', [crudController::class,'updateData'])->name('updateSettings');
-Route::get('users','adminController@getUsers')->name('users');
-
+Route::get('/users','adminController@getUsers')->name('users');
+Route::get('/privacy',function(){
+    return view('frontend.Privacy');
+});
 
 
 //advertisement
@@ -81,7 +81,7 @@ Route::post('addadv', [crudController::class,'insertData']);
 Route::get('all-advs', [adminController::class,'allAdv'])->name('allAdv');
 Route::get('editadv/{id}', [adminController::class,'editAdv'])->name('editAdv');
 Route::post('updateadv/{id}', [crudController::class,'updateAdv'])->name('updateAdv');
-
+Route::get('search-content',[frontController::class,'searchContent'])->name('search-content');
 
 
 //notification system

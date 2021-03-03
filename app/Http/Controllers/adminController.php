@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
 use mysql_xdevapi\Table;
+use App\User;
 
 class adminController extends Controller
 {
@@ -80,8 +81,6 @@ class adminController extends Controller
     }
 
 
-
-
        public function getSettings(){
            $data = DB::table('settings')->first();
 
@@ -99,6 +98,10 @@ class adminController extends Controller
 
        public function getUsers(){
         $users = DB::table('users')->get();
+        foreach ($users as $user){
+            $user_role = User::getRoleUser($user->id);
+            $user->role = $user_role;
+        }
         return view('backend.users',compact('users'));
        }
 

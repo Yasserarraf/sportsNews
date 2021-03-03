@@ -330,7 +330,8 @@
 						</div><!--col-xs-4-->
 						@endif
 						@endforeach
-						<div class="col-md-4">
+				
+                   <div class="col-md-4">
 						@foreach($others as $key=>$o)
 					    @if($key == 1 )
 							<div class="feature_news_item">
@@ -354,7 +355,6 @@
 						</div><!--col-xs-4-->
 						@endif
 						@endforeach
-
 						<div class="col-md-4">
 						@foreach($others as $key=>$o)
 					    @if($key == 2 )

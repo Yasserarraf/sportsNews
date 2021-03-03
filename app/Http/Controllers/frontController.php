@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\post;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
@@ -42,11 +43,13 @@ class frontController extends Controller
     }
 
     public function index(){
-        $featured= DB::table('posts')->where('category_id', 'LIKE','%3%')->orderby('pid','DESC')->get();
-        $general= DB::table('posts')->where('category_id', 'LIKE','%4%')->orderby('pid','DESC')->get();
-        $tennis= DB::table('posts')->where('category_id', 'LIKE','%5%')->orderby('pid','DESC')->get();
-        $others= DB::table('posts')->where('category_id', 'LIKE','%6%')->orderby('pid','DESC')->get();
-        return view('frontend.index',['featured'=>$featured,'general'=>$general,'tennis'=>$tennis , 'others'=>$others]);
+        $categories = DB::table('categories')->where('status','on')->get();
+        foreach($categories as $category){
+            $posts = post::getPosts($category->cid);
+            $category->posts = $posts;
+        }
+
+        return view('frontend.index',compact('categories'));
     }
     public function category($slug){
         $cat = DB::table('categories')->where('slug',$slug)->first();
@@ -58,9 +61,8 @@ class frontController extends Controller
         return view('frontend.single');
     }
     public function article($slug){
-        $data = DB::table('posts')->where('slug',$slug)->first();
-        $category = explode(',',$data->category_id);
-        $category = $category[0];
+        $data = DB::table('posts')->where('pid',$slug)->first();
+
         return view('frontend.single',['data'=>$data]);
     }
 }

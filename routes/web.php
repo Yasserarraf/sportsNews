@@ -22,7 +22,7 @@ use Illuminate\Support\Facades\Mail;
 Route::get('/', [frontController::class,'index'])->name('frontend');
 
 
-Route::get('/', [frontController::class,'index']);
+
 Route::get('article/{slug}','frontController@article');
 Route::get('category/{slug}','frontController@category')->name('singleCat');
 

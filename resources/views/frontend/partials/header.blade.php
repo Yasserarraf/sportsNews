@@ -94,7 +94,7 @@
 				<div class="pull-right">
 					<form class="navbar-form" role="search">
 						<div class="input-group">
-							<input class="form-control" placeholder="Search" name="q" type="text">
+							<input class="form-control" id="search-content" placeholder="Search" name="q" type="text">
 							<div class="input-group-btn">
 								<button class="btn btn-default" type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
 							</div>
@@ -106,3 +106,17 @@
 		</nav>
 		<!-- .navbar -->
 	</header>
+  <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+
+      <script>
+      $(document).ready(function(){
+
+
+          $("#search-content").keyup(function () {
+              var that = this,
+                  value = $(this).val();
+
+              console.log(value);
+          });
+      });
+  </script>

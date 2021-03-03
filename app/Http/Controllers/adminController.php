@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
@@ -99,6 +100,11 @@ class adminController extends Controller
 
        public function getUsers(){
         $users = DB::table('users')->get();
+
+        foreach ($users as $user){
+            $user_role = User::getRoleUser($user->id);
+            $user->role = $user_role;
+        }
         return view('backend.users',compact('users'));
        }
 

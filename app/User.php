@@ -5,6 +5,7 @@ namespace App;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\DB;
 
 class User extends Authenticatable
 {
@@ -55,5 +56,12 @@ class User extends Authenticatable
     }
     public function getRole(){
         return $this->roles()->get()->first();
-}
+    }
+    public static function getRoleUser($id){
+        $role_user = DB::table('role_user')->where('id',$id)->first();
+
+        $role = DB::table('roles')->where('id',$role_user->role_id)->first();
+        return $role->name;
+    }
+
 }

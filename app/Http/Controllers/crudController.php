@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
 use App\Mail\NotificationSystem;
 use Illuminate\Support\Facades\Mail;
-
+use Intervention\Image\Facades\Image;
 class crudController extends Controller
 {
     public function insertData(Request $request){
@@ -22,7 +22,9 @@ class crudController extends Controller
         }
 
         if($request->hasFile('image')){
-            $data['image'] = $this->uploadImage($tbl, $data['image']);
+
+
+            $data['image'] =  $this->uploadImage($tbl, $data['image']);;
         }
         if($request->has('category_id')){
             $data['category_id']= implode(',',$data['category_id']);
@@ -81,7 +83,11 @@ class crudController extends Controller
 
     public function uploadImage($location, $imageName){
         $name = $imageName->getClientOriginalName();
-        $imageName->move(public_path().'/'.$location, date('ymdgis').$name);
+        $imagePath = $imageName->store('uploads','public');
+
+        $image = Image::make(public_path("posts/{$imagePath}"))->fit(600,600);
+
+         $image->save();
         return date('ymdgis').$name;
     }
 }

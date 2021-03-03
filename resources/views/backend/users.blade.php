@@ -19,7 +19,7 @@
                     <th scope="row">{{$user->id}}</th>
                     <td>{{$user->name}}</td>
                     <td>{{$user->email}}</td>
-                    <td>{{}}</td>
+                    <td>{{$user->role}}</td>
 
                     <td>@mdo</td>
                 </tr>

@@ -32,11 +32,11 @@ class crudController extends Controller
         session::flash('message','Data inserted successfully');
         $users = DB::table('users')->get();
         if($tbl == "posts"){
-            foreach ($users as $user)
+            /*foreach ($users as $user)
             {
                 Mail::to($user->email)->send(new NotificationSystem());
             }
-
+            */
         }
         return redirect()->back();
     }

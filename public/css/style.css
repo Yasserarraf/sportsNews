@@ -200,10 +200,7 @@ ul {
     width: 80px;
     height: 80px;
 }
-.header-section .logo{
-    /*padding-top: 10px;*/
 
-}
 .header-section .social_icon1{
     padding-top: 25px;
     float: right;
@@ -1180,10 +1177,8 @@ ul {
 
 /* social links */
 
-.social-icon{
-    background: #fff;
-    padding: 5px 10px;
-    color: #333;
+.social_icon {
+    background-color: #fff;
 }
 
 .top-social{

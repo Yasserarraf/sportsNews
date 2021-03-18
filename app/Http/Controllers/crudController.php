@@ -7,9 +7,14 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
 use App\Mail\NotificationSystem;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Hash;
 
 class crudController extends Controller
 {
+    public function __construct(){
+        $this->middleware('auth');
+    }
+
     public function insertData(Request $request){
         $data = $request->except(['_token']);
         $tbl = decrypt($data['tbl']);
@@ -125,6 +130,39 @@ class crudController extends Controller
         );
 
         return response()->json($response);
+    }
+
+    public function addAdmin(Request $request){
+        $data = $request->except(['_token']);
+
+        if(!filter_var($data['email'], FILTER_VALIDATE_EMAIL)){
+
+            session::flash('error','Email invalide');
+
+        }else if(strlen($data['password']) < 8){
+
+            session::flash('error','Password require at least 8 characters');
+
+        }else if($data['password'] !== $data['password_confirmation']){
+
+            session::flash('error','Passwords doesn\'t match');
+
+        }else if(count(DB::table('users')->where('email', $data['email'])->get()) > 0){
+
+            session::flash('error','Admin Already exist with the same email');
+
+        }else {
+            $data['created_at'] = date('Y-m-d H:i:s');
+            $data['updated_at'] = date('Y-m-d H:i:s');
+
+            $data['password'] = Hash::make($data['password']);
+            unset($data['password_confirmation']);
+
+            DB::table('users')->insert($data);
+            session::flash('message','Admin Added successfully');
+        }
+
+        return redirect()->back();
     }
 
     public function uploadImage($location, $imageName){

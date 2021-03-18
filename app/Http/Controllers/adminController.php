@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
 use mysql_xdevapi\Table;
 use App\User;
+use Illuminate\Support\Facades\Auth;
 
 class adminController extends Controller
 {
@@ -96,9 +97,15 @@ class adminController extends Controller
             return redirect()->back();
         }
         $ids = $data['select-data'];
+
         foreach($ids as $id){
             DB::table($tbl)->where($tblid,$id)->delete();
         }
+
+        if($tbl === 'users' && in_array(Auth::id() ,$ids)){
+            return redirect('logout');
+        }
+
         session::flash('message','data deleted successfully ' );
         return redirect()->back();
     }
@@ -120,13 +127,9 @@ class adminController extends Controller
 
 
        public function getUsers(){
-        $users = DB::table('users')->get();
+        $users = DB::table('users')->paginate(20);
         
-        /*foreach ($users as $user){
-            $user_role = User::getRoleUser($user->id);
-            $user->role = $user_role;
-        }*/
-        return view('backend.users',compact('users'));
+        return view('backend.admin.users',compact('users'));
        }
 
        public function addAdv(){
@@ -147,6 +150,10 @@ class adminController extends Controller
         $subscribers = DB::table('subscribers')->orderBy('created_at', 'DESC')->paginate(20);
         
         return view('backend.subscribers.subscribers', compact('subscribers'));
+    }
+
+    public function addAdmin(){
+        return view('backend.admin.addAdmin');
     }
 
 }

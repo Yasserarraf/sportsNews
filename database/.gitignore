@@ -1,6 +1,2 @@
 *.sqlite
 *.sqlite-journal
-
-public/posts/
-public/advertisements/
-public/settings/

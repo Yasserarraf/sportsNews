@@ -37,30 +37,15 @@
 		    		<div class="col-md-6">
 		    			<div class="top_ber_right">
 		    				<div class="top-menu">
-                                @guest
-
-		    					<ul class="nav navbar-nav">
-			                        <li><a href="{{route('login')}}">Login</a></li>
-			                        <li><a href="{{route('register')}}">Register</a></li>
-	                    		</ul>
-                                @else
-
-                                  
-                                @if(Auth::user()->hasRole('admin'))
+                                
+                                @if(Auth::user())
                                     <ul class="nav navbar-nav">
 									    <li><a href="#">{{ Auth::user()->name }}</a></li>
                                         <li><a href="{{route('dashboard')}}">Dashboard</a></li>
 										<li><a href="{{route('logout')}}">logout</a></li>
                                     </ul>
-                                    @else
-									<ul class="nav navbar-nav">
-									   <li><a href="#">{{ Auth::user()->name }}</a></li>
-										<li><a href="{{route('logout')}}">logout</a></li>
-                                    </ul>
-                                   
-                                    @endif
+								@endif
 
-                                @endguest
 		    				</div><!--top-menu-->
 		    			</div><!--top_ber_left-->
 		    		</div><!--col-md-6-->

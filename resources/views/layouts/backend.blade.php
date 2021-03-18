@@ -22,9 +22,6 @@
 	  <li class="treeview">
             <a href="{{url('/')}}">
               <i class="fa fa-file"></i> <span>Home</span>
-              
-                
-
             </a>
       </li>
     <li class="treeview">
@@ -66,7 +63,7 @@
             <ul class="treeview-menu">
                 <li><a href="{{route('subscribers')}}"><i class="fa fa-eye"></i>All Subscribers</a></li>
                 <li><a href="{{route('users')}}"><i class="fa fa-eye"></i>All Admins</a></li>
-                <li><a href="#"><i class="fa fa-plus-circle"></i>Add Admin</a></li>
+                <li><a href="{{route('registerAdmin')}}"><i class="fa fa-plus-circle"></i>Add Admin</a></li>
             </ul>
         </li>
         <li class="treeview">
@@ -78,7 +75,10 @@
             </a>
             <ul class="treeview-menu">
               <li><a href="{{route('getSettings')}}"><i class="fa fa-edit"></i>Media</a></li>
-              <li><a href="{{route('logout')}}"><i class="fa fa-power-off"></i>Log Out</a></li>
+              <li>
+                <a href="{{route('logout')}}">
+                  <i class="fa fa-power-off"></i>Log Out</a>
+              </li>
             </ul>
         </li>
 	</ul>
@@ -92,7 +92,7 @@
 
 <footer>
 	<div class="col-sm-6">
-  © Copyright {{date('Y')}} - Sportify Design by: <a href="http://www.fstt.ac.ma/" > Cycle d'Ingénieur LSI</a>
+  © Copyright {{date('Y')}} - Sport News Design by: <a href="http://www.fstt.ac.ma/" > Cycle d'Ingénieur LSI</a>
 	</div>
 
 </footer>

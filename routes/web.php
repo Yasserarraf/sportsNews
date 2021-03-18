@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\frontController;
 use App\Http\Controllers\adminController;
 use App\Http\Controllers\categoryController;
@@ -80,13 +82,14 @@ Route::get('/privacy',function(){
 
 //advertisement
 
-
-
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Route::get('logout',[App\Http\Controllers\HomeController::class, 'logout'])->name('logout');
+Route::get('logout',function(){
+    Auth::logout();
+    return redirect('/login');
+})->name('logout');
 
 Route::get('add-adv', [adminController::class,'addAdv'])->name('addAdv');
 Route::post('addadv', [crudController::class,'insertData']);
@@ -105,4 +108,18 @@ Route::get('email',function(){
 //subscribe
 
 Route::get('/subscribers',[adminController::class,'getSubscribers'])->name('subscribers');
+Route::post('subscribe', [crudController::class,'subscribe'])->name('subscribe');
+
+//auth
+
+Route::get('/register',function(){
+    if(DB::table('users')->count() <= 0){
+        return view('auth.register');
+    }
+   
+    return redirect('/login');
+})->name('register');
+
+Route::get('register-admin',[adminController::class,'addAdmin'])->name('registerAdmin');
+Route::post('addadmin', [crudController::class,'addAdmin'])->name('addAdmin');
 Route::post('subscribe', [crudController::class,'subscribe'])->name('subscribe');

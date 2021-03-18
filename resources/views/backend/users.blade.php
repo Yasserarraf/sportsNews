@@ -9,7 +9,6 @@
                     <th scope="col">#</th>
                     <th scope="col">name</th>
                     <th scope="col">email</th>
-                    <th scope="col">role</th>
                     <th scope="col">Actions</th>
                 </tr>
                 </thead>
@@ -19,7 +18,6 @@
                     <th scope="row">{{$user->id}}</th>
                     <td>{{$user->name}}</td>
                     <td>{{$user->email}}</td>
-                    <td>{{$user->role}}</td>
 
                     <td>@mdo</td>
                 </tr>

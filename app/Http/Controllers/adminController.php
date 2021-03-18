@@ -20,7 +20,7 @@ class adminController extends Controller
            return view('backend.index');
        }
        public function allPosts(){
-        $posts = DB::table('posts')->orderby('pid','DESC')->paginate(20);
+        $posts = DB::table('posts')->orderby('updated_at','DESC')->paginate(20);
         foreach($posts as $post){
             $categories= explode(',',$post->category_id);
             foreach($categories as $cat){
@@ -48,18 +48,41 @@ class adminController extends Controller
         $categories = DB::table('categories')->get();
         return view('backend.posts.edit',['data'=>$data, 'categories'=>$categories, 'postcat'=>$postcat]);
     }
-       public function viewCategory(){
-           $data = DB::table('categories')->get();
-           return view('backend.categories.category',compact('data'));
-       }
+        public function viewCategory(){
+            $sections = DB::table('sections')->get();
+            if(count($sections) <= 0){
+                    return redirect('viewSection');
+            }
+            $data = DB::table('categories')->get();
+            return view('backend.categories.category',compact('data', 'sections'));
+        }
     public function editCategory($id){
-       $singleData = DB::table('categories')->where('cid',$id)->first();
-       if($singleData == NULL){
-           return redirect('viewCategory');
-       }
-       $data = DB::table('categories')->get();
-        return view('backend.categories.editCategory',compact('data','singleData'));
+        $sections = DB::table('sections')->get();
+        if(count($sections) <= 0){
+            return redirect('viewSection');
+        }
+        $singleData = DB::table('categories')->where('cid',$id)->first();
+        if($singleData == NULL){
+            return redirect('viewCategory');
+        }
+        $data = DB::table('categories')->get();
+        return view('backend.categories.editCategory',compact('data','singleData', 'sections'));
     }
+
+    public function viewSection(){
+        $data = DB::table('sections')->get();
+        return view('backend.sections.section',compact('data'));
+    }
+
+    public function editSection($id){
+        $singleData = DB::table('sections')->where('sid',$id)->first();
+        if($singleData == NULL){
+            return redirect('viewSection');
+        }
+        $data = DB::table('sections')->get();
+        return view('backend.sections.editSection',compact('data','singleData'));
+    }
+
     public function multipleDelete(Request $request){
         $data = $request->except(['_token']);
         if($data['bulk-action'] == 0){
@@ -98,10 +121,11 @@ class adminController extends Controller
 
        public function getUsers(){
         $users = DB::table('users')->get();
-        foreach ($users as $user){
+        
+        /*foreach ($users as $user){
             $user_role = User::getRoleUser($user->id);
             $user->role = $user_role;
-        }
+        }*/
         return view('backend.users',compact('users'));
        }
 
@@ -114,9 +138,15 @@ class adminController extends Controller
            return view('backend.advertisement.all-adv',  compact('data'));
        }
 
-       public function editAdv($id){
+    public function editAdv($id){
         $data = DB::table('advertisements')->where('aid', $id)->first();
         return view('backend.advertisement.edit-adv',  compact('data'));
+    }
+
+    public function getSubscribers(){
+        $subscribers = DB::table('subscribers')->orderBy('created_at', 'DESC')->paginate(20);
+        
+        return view('backend.subscribers.subscribers', compact('subscribers'));
     }
 
 }

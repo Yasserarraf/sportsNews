@@ -60,7 +60,8 @@ class User extends Authenticatable
 public static function getRoleUser($id){
     $role_user = DB::table('role_user')->where('id',$id)->first();
 
-    $role = DB::table('roles')->where('id',$role_user->role_id)->first();
-    return $role->name;
+    $role = $role_user != null ? DB::table('roles')->where('id',$role_user->role_id)->first() : "";
+
+    return $role;
 }
 }

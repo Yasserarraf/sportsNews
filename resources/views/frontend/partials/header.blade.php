@@ -1,5 +1,31 @@
   <!-- Header Section -->
   <header>
+  <style>
+	.dropdown {
+		position: relative;
+		display: inline-block;
+	}
+	.dropdown-content {
+		display: none;
+		position: absolute;
+		background-color: #f1f1f1;
+		min-width: 160px;
+		box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+		z-index: 1;
+		padding: 10px;
+	}
+	.dropdown-content a {
+		color: black;
+		padding: 12px 16px;
+		text-decoration: none;
+		display: block;
+	}
+	.dropdown-content a:hover {background-color: #ddd;}
+
+	.dropdown:hover .dropdown-content {display: block;}
+
+	.dropdown:hover .dropbtn {background-color: #3e8e41;}
+  </style>
 	    <div class="container">
 	     	<div class="top_ber">
 				<div class="row">
@@ -45,8 +71,8 @@
 				<div class="row">
 		    	 	<div class="col-md-3">
 						<div class="logo">
-						@if($setting->image)
-						<a  href=""><img class="img-responsive " src="{{url('settings')}}/{{$setting->image}}" alt="logo" ></a>
+						@if($setting && $setting->image)
+						<a  href="{{url('/')}}"><img class="img-responsive" src="{{url('settings')}}/{{$setting->image}}" alt="logo"></a>
 						@endif
 						</div><!--logo-->
 		    	 	</div><!--col-md-3-->
@@ -61,9 +87,11 @@
 
 		    	 	<div class="col-md-3 top-social">
 						<div class="social_icon1">
+						@if($setting)
 						@foreach($setting->social as $key=>$social)
-						<a href="{{$social}}" class="social-icon"><i class="fa fa-{{$icons[$key]}}"></i></a>
+						<a href="{{$social}}"><i class="fa fa-{{$icons[$key]}}"></i></a>
 						@endforeach
+						@endif
 						</div> <!--social_icon1-->
 		    	 	</div><!--col-md-3-->
 		    	</div> <!--row-->
@@ -82,11 +110,19 @@
 				</div>
 				<div id="navbar" class="collapse navbar-collapse sidebar-offcanvas">
 				<ul class="nav navbar-nav">
-					@foreach($categories as $cat)
-					<li><a class="page-scroll" href="{{route('singleCat',['slug'=>$cat->slug])}}">{{$cat->title}}</a></li>
+					@foreach($sections as $section)
+					<li>
+					<div class="dropdown">
+						<a class="page-scroll" href="{{route('singleSection',['slug'=>$section->slug])}}">{{$section->title}}</a>
+						<div class="dropdown-content">
+  							@foreach($section->cathegories as $cat)
+							  <a href="{{route('singleCat',['slug'=>$cat->slug])}}">{{$cat->title}}</a>
+							@endforeach
+						</div>
+					</div>
+					</li>
                     @endforeach
 
-					
 				</ul>
 				<div class="pull-right">
 					<form class="navbar-form" role="search">

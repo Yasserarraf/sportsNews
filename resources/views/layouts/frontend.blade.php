@@ -4,7 +4,8 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Sports</title>
+	<meta name="csrf-token" content="{{ csrf_token() }}" />
+    <title>Sports News</title>
 
     <link href="{{asset('css/font-awesome.min.min.css')}}" rel="stylesheet">
     <!-- Goole Fonts -->
@@ -25,6 +26,7 @@
 
     <!--Theme CSS -->
     <link href="{{asset('css/style.css')}}" rel="stylesheet">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -63,27 +65,29 @@
 			<div class="row">
 				<div class="col-md-3">
 					<div class="text_widget footer_widget">
-					<div class="footer_widget_title"><h2>About Sportify</h2></div>
+					<div class="footer_widget_title"><h2>About Sport News</h2></div>
 
 		         	<div class="footer_widget_content">
+					 @if($setting && $setting->about)
 					 <p>{{$setting->about}}</p>
+					 @endif
 					</div>
 					</div><!--text_widget-->
 				</div><!--col-xs-3-->
 
-				<div class="col-md-6">
+				<div class="col-md-5">
 					<div class="footer_widget">
                         <div class="footer_widget_title"><h2>Discover</h2></div>
 					    <div class="footer_menu_item ">
 						<div class="row">
-							<div class="col-sm-4">
+							<div class="col-sm-5">
 								<ul class="nav navbar-nav ">
-								@foreach($categories as $cat)
-					                 <li><a  href="{{route('singleCat',['slug'=>$cat->slug])}}">{{$cat->title}}</a></li>
+								@foreach($sections as $section)
+					                 <li><a  href="{{route('singleSection',['slug'=>$section->slug])}}">{{$section->title}}</a></li>
                                  @endforeach
 								</ul>
 						    </div><!--col-sm-4-->
-					        <div class="col-sm-4 ">
+					        <div class="col-sm-3 ">
 							<div class="footer_widget_title"><h2>Use it</h2></div>
 								<ul class="nav navbar-nav  ">
 									<li><a href="../navbar/">Track & Field</a></li>
@@ -97,11 +101,46 @@
                     </div><!--footer_widget-->
 				</div><!--col-xs-6-->
 
-				<div class="col-md-3">
+				<div class="col-md-4">
  					<div class="text_widget footer_widget">
-						<div class="footer_widget_title"><h2>Editor’s Message</h2></div>
+						<div class="footer_widget_title"><h2>Subscribe to our newsletter</h2></div>
 						
-						<div class="footer_widget_content">Collaboratively administrate empowered marketsplug-and-play networks. Dynamic procrastinate after.marketsplug-and-play networks. Dynamic procrastinate users after. Dynamic procrastinateafter. marketsplug-and-play networks. Dynamic procrastinate users after...</div>
+						<div class="footer_widget_content">
+							<form id="subsribe-form">
+								<p>Email :</p>
+								<input type="email" id="email" name="email" size="35" style="color: black;" placeholder="email@gmail.com" required>
+								<button type="submit" id="submit-btn" style="background-color: #ff6102;">Subscribe</button>
+								<p id="subscribe-message"></p>
+							</form>
+							<script>
+								const messageP = document.getElementById('subscribe-message');
+								const emailInput = document.getElementById('email');
+
+								$(document).ready(function(){
+										var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
+										$("#subsribe-form").submit(function(e){
+											e.preventDefault();
+											messageP.innerHTML = '';
+											$.ajax({
+												url: "{{url('/subscribe')}}",
+												type: 'POST',
+												data: {_token: CSRF_TOKEN, email:$("#email").val()},
+												dataType: 'JSON',
+												success: function (data) { 
+													if(data && data.msg){
+														messageP.innerHTML = data.msg;
+														if(data.msg !== 'Invalid email !'){
+															emailInput.value = '';
+														}
+													}
+												}
+											}); 
+										});
+								})
+								
+								
+							</script>
+						</div>
 					</div>
 				</div><!--col-xs-3-->
 			</div><!--row-->
@@ -116,15 +155,14 @@
 							<span class="footer_widget_title">Editors: </span>
 							YASSER ARRAF - MOUHAMMAD TOIHIR MOHAMED HALIM - FILAL Imane 
 
-
 					</div><!--col-xs-3-->
-					<div class="col-md-6">
+					<div class="col-md-5">
 						<div class="copyright">
 						© Copyright {{date('Y')}} - Sportify Design by: <a href="http://www.fstt.ac.ma/" >Cycle d'Ingénieur LSI</a>
 						</div>
 					</div><!--col-xs-6-->
 					<div class="col-md-3">
-						Sportify
+						SportNews
 					</div><!--col-xs-3-->
 				</div><!--row-->
 			</div><!--container-->
@@ -135,19 +173,20 @@
 </div> <!--main-wrapper-->
 
 <!-- Include all compiled plugins (below), or include individual files as needed -->
-<script src="{{asset('js/jquery.min.js')}}"></script>
+<script src='{{asset("js/jquery.min.js")}}'></script>
+
 
 <!-- Owl carousel -->
-<script src="{{asset('js/owl.carousel.js')}}"></script>
+<script src='{{asset("js/owl.carousel.js")}}'></script>
 
 <!-- Bootstrap -->
-<script src="{{asset('js/bootstrap.min.js')}}"></script>
+<script src='{{asset("js/bootstrap.min.js")}}'></script>
 
 <!-- Theme Script File-->
-<script src="{{asset('js/script.js')}}"></script>
+<script src='{{asset("js/script.js")}}'></script>
 
 <!-- Off Canvas Menu -->
-<script src="{{asset('js/offcanvas.min.js')}}"></script>
+<script src='{{asset("js/offcanvas.min.js")}}'></script>
 <script src="https://apps.elfsight.com/p/platform.js" defer></script>
 
 

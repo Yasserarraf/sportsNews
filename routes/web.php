@@ -41,6 +41,18 @@ Route::post('updateCategory/{id}', [categoryController::class,'updateCategory'])
 
 Route::post('multipleDelete', [adminController::class,'multipleDelete'])->name('multipleDelete');
 
+//sections
+
+Route::get('section/{slug}','frontController@section')->name('singleSection');
+
+Route::get('viewSection', [adminController::class,'viewSection'])->name('viewSection');
+
+Route::post('addSection', [CrudController::class,'insertData'])->name('addSection');
+
+Route::get('editSection/{id}', [adminController::class,'editSection'])->name('editSection');
+
+Route::post('updateSection/{id}', [CrudController::class,'updateData'])->name('updateSection');
+
 //settings
 
 Route::get('getSettings', [adminController::class,'getSettings'])->name('getSettings');
@@ -89,3 +101,8 @@ Route::get('email',function(){
     Mail::to('yasserarraf012@gmail.com')->send(new NotificationSystem());
     return new NotificationSystem();
 });
+
+//subscribe
+
+Route::get('/subscribers',[adminController::class,'getSubscribers'])->name('subscribers');
+Route::post('subscribe', [crudController::class,'subscribe'])->name('subscribe');

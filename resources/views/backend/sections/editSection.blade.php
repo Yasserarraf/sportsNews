@@ -3,7 +3,7 @@
 <div class="container-fluid">
 	<div class="row">
 		<div class="col-sm-12 title">
-			<h1><i class="fa fa-bars"></i> Categories</h1>
+			<h1><i class="fa fa-bars"></i> Edit Section</h1>
 		</div>
 
 		<div class="col-sm-4 cat-form">
@@ -13,54 +13,37 @@
                     {{Session('message')}}
                 </div>
             @endif
-            <h3>Add New Category</h3>
-			<form method="post" action="{{route('addCategory')}}">
+            <h3>Edit Section</h3>
+			<form method="post" action="{{route('updateSection',['id'=>$singleData->sid])}}">
 				@csrf
-                <input type="hidden" name="tbl" value="{{encrypt('categories')}}">
+                <input type="hidden" name="tbl" value="{{encrypt('sections')}}" >
                 <div class="form-group">
 					<label>Name</label>
-					<input type="text" name="title" id="category_name" class="form-control">
+					<input type="text" name="title" id="category_name" class="form-control" value="{{$singleData->title}}">
 					<p>The name is how it appears on your site.</p>
 				</div>
 
 				<div class="form-group">
 					<label>Slug</label>
-					<input type="text" name="slug" id="slug" class="form-control" readonly="">
+					<input type="text" name="slug" id="slug" class="form-control" readonly=""value="{{$singleData->slug}}">
 					<p>The “slug” is the URL-friendly version of the name. It is usually all lowercase and contains only letters, numbers, and hyphens.</p>
 				</div>
-
-                <div class="form-group">
-                	<label>Section</label>
-                    <select class="form-control" name="section" >
-                        @foreach($sections as $section)
-                        <option value="{{$section->title}}">{{$section->title}}</option>
-                        @endforeach
-                    </select>
-                </div>
-
-                <div class="form-group">
-                	<label>Status</label>
-                    <select class="form-control" name="status" >
-                        <option value="on">on</option>
-                        <option value="off">off</option>
-                    </select>
-                </div>
-
+                
 				<div class="form-group">
-					<button class="btn btn-primary" type="submit">Add New Category</button>
+					<button class="btn btn-primary" type="submit">Update Section</button>
 				</div>
 			</form>
 
 
 		</div>
 
-        <div class="col-sm-8 cat-view">
+		<div class="col-sm-8 cat-view">
             <form action="{{route('multipleDelete')}}" method="post">
                 <div class="row">
 
                     @csrf
-                    <input type="hidden" name="tbl" value="{{encrypt('categories')}}">
-                    <input type="hidden" name="tblid" value="{{encrypt('cid')}}">
+                    <input type="hidden" name="tbl" value="{{encrypt('sections')}}">
+                    <input type="hidden" name="tblid" value="{{encrypt('sid')}}">
                     <div class="col-sm-3">
                         <select name="bulk-action" class="form-control">
                             <option value="0">Bulk Action</option>
@@ -81,21 +64,17 @@
                         <tr>
                             <th><input type="checkbox" id="select-all"> Name</th>
                             <th>Slug</th>
-                            <th>Section Name</th>
-                            <th>Status</th>
                         </tr>
                         </thead>
                         <tbody>
                         @if(count($data)>0)
-                            @foreach($data as $category)
+                            @foreach($data as $section)
                                 <tr>
                                     <td>
-                                        <input type="checkbox" name="select-data[]" value="{{$category->cid}}">
-                                        <a href="{{route('editCategory',['id'=>$category->cid])}}">{{$category->title}}</a>
+                                        <input type="checkbox" name="select-data[]" value="{{$section->sid}}">
+                                        <a href="{{route('editSection',['id'=>$section->sid])}}">{{$section->title}}</a>
                                     </td>
-                                    <td>{{$category->slug}}</td>
-                                    <td>{{$category->section}}</td>
-                                    <td>{{$category->status}}</td>
+                                    <td>{{$section->slug}}</td>
                                 </tr>
                             @endforeach
                         @else
@@ -109,8 +88,6 @@
                 </div>
             </form>
         </div>
-
-    </div>
 	</div>
 </div>
 @endsection

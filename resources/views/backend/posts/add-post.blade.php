@@ -21,11 +21,12 @@
                         <div class="col-sm-9">
                             <div class="form-group">
                                 <label>Title </label>
-                                <input type="text" name="title" id="post_title" class="form-control" placeholder="Enter title here">
+                                <input type="text" name="title" id="post_title" class="form-control" placeholder="Enter title here" >
                             </div>
                             <div class="form-group">
                                 <label>Slug </label>
-                                <input type="text" name="slug" id="slug" class="form-control" placeholder="Enter slug here">
+                                <input type="text" name="slug" id="slug" class="form-control" >
+                                <p>The “slug” is the URL-friendly version of the name. It is usually all lowercase and contains only letters, numbers, and hyphens.</p>
                             </div>
                             <div class="form-group">
                                 <label>Description </label>
@@ -58,7 +59,7 @@
                             <div class="content featured-image">
                                 <h4>Featured Image <span class="pull-right"><i class="fa fa-chevron-down"></i></span></h4><hr>
                                 <p> <img id="output"style="max-width:100%" /></p>
-                                <input type="file" accept="image/*" name="image" id="file" onchange="loadFile(event)"  style="display: none;">
+                                <input type="file" accept="image/*" name="image" id="file" onchange="loadFile(event)"  style="display: none;" required>
                                 <p><label for="file" style="cursor: pointer;" class="btn btn-warning">Set Featured Image</label></p>
 
 
@@ -83,6 +84,23 @@
             var image =document.getElementById('output');
             image.src=URL.createObjectURL(event.target.files[0]);
         };
+    </script>
+    <script>
+        
+        var title = document.getElementById('post_title');
+        var slug = document.getElementById('slug');
+        title.addEventListener('input', (e) => {
+            slug.value = slugify(e.target.value);
+        });
+
+        function slugify(text) {
+            return text.toString().toLowerCase()
+                .replace(/\s+/g, '-')           // Replace spaces with -
+                .replace(/[^\w\-]+/g, '')       // Remove all non-word chars
+                .replace(/\-\-+/g, '-')         // Replace multiple - with single -
+                .replace(/^-+/, '')             // Trim - from start of text
+                .replace(/-+$/, '');            // Trim - from end of text
+        }
     </script>
 
 @stop

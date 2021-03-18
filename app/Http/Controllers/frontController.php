@@ -5,15 +5,18 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
+use \App\Post;
 
 class frontController extends Controller
 {
     public function __construct(){
+        $sections = DB::table('sections')->get();
 
-        $categories = DB::table('categories')->where('status','on')->get();
-        view()->share([
-            'categories' => $categories,
-        ]);
+        foreach ($sections as &$section) {
+            $section->cathegories = DB::table('categories')->where('section', $section->title)->where('status','on')->get();
+        }
+        unset($section);
+        
         $setting = DB::table('settings')->first();
 
         if($setting){
@@ -28,16 +31,20 @@ class frontController extends Controller
             $icons = [];
         }
 
+        $latest = DB::table('posts')->where('status', 'publish')->orderBy('created_at', 'DESC')->take(5)->get();
+
         $leaderboard = DB::table('advertisements')->where('status', 'display')->where('location', 'leaderboard')->orderby('aid', 'DESC')->first();
         $sidebarTop = DB::table('advertisements')->where('status', 'display')->where('location', 'sidebar-top')->orderby('aid', 'DESC')->first();
         $sidebarBottom = DB::table('advertisements')->where('status', 'display')->where('location', 'sidebar-bottom')->orderby('aid', 'DESC')->first();
-
+        
         view()->share([
             'setting'=>$setting,
+            'sections'=> $sections,
             'icons'=>$icons,
             'leaderboard' => $leaderboard,
             'sidebarTop'=>$sidebarTop,
-            'sidebarBottom'=>$sidebarBottom
+            'sidebarBottom'=>$sidebarBottom,
+            'latest' => $latest
         ]);
     }
 
@@ -46,26 +53,76 @@ class frontController extends Controller
         $general= DB::table('posts')->where('category_id', 'LIKE','%4%')->orderby('pid','DESC')->get();
         $tennis= DB::table('posts')->where('category_id', 'LIKE','%5%')->orderby('pid','DESC')->get();
         $others= DB::table('posts')->where('category_id', 'LIKE','%6%')->orderby('pid','DESC')->get();
+        
         return view('frontend.index',['featured'=>$featured,'general'=>$general,'tennis'=>$tennis , 'others'=>$others]);
     }
     public function category($slug){
         $cat = DB::table('categories')->where('slug',$slug)->first();
-        $posts = DB::table('posts')->where('category_id',$cat->cid)->get();
 
+        $posts = DB::table('posts')->where('status', 'publish')
+        ->Where(function($query) use($cat){
+            $query->orWhere('category_id', 'LIKE', $cat->cid)
+            ->orWhere('category_id', 'LIKE', $cat->cid.',%')
+            ->orWhere('category_id', 'LIKE', '%,'.$cat->cid.',%')
+            ->orWhere('category_id', 'LIKE', '%,'.$cat->cid);
+        })
+        ->orderBy('created_at', 'DESC')->paginate(10);
+        
         return view('frontend.category', compact('posts','cat'));
     }
+
+    public function section($slug){
+        $section = DB::table('sections')->where('slug', $slug)->first();
+        $posts = [];
+        if($section){
+            $section->cathegories = DB::table('categories')->where('section',$section->title)->where('status', 'on')->pluck('cid')->toArray();
+            
+            if(count($section->cathegories) > 0){
+                $posts = DB::table('posts')->where('status', 'publish')
+                ->Where(function($query) use($section){
+                    foreach ($section->cathegories as $value) {
+                        $query->orWhere('category_id', 'LIKE', $value)
+                        ->orWhere('category_id', 'LIKE', $value.',%')
+                        ->orWhere('category_id', 'LIKE', '%,'.$value.',%')
+                        ->orWhere('category_id', 'LIKE', '%,'.$value);
+                    }
+                })
+                ->orderBy('created_at', 'DESC')->paginate(10);
+            }
+            
+          }
+
+        return view('frontend.category', compact('posts'));
+    }
+
     public function single(){
         return view('frontend.single');
     }
     public function article($slug){
         $data = DB::table('posts')->where('slug',$slug)->first();
+
+        $cat=explode(',',$data->category_id);
+        /*foreach ($cat as $key => $value) {
+            $cat[$key] = DB::table('posts')->where('category_id', 'LIKE','%'. $value.'%')->where('pid', '!=', $data->pid)->take(3)->get()->toArray();
+        }*/
+        $relatedNews = DB::table('posts')->where('status', 'publish')
+            ->Where(function($query) use($cat){
+                foreach ($cat as $value) {
+                    $query->orWhere('category_id', 'LIKE', $value)
+                    ->orWhere('category_id', 'LIKE', $value.',%')
+                    ->orWhere('category_id', 'LIKE', '%,'.$value.',%')
+                    ->orWhere('category_id', 'LIKE', '%,'.$value);
+                }
+            })
+            ->where('pid', '!=', $data->pid)
+            ->orderBy('created_at', 'DESC')->take(4)->get();
         
-        return view('frontend.single',['data'=>$data]);
+        return view('frontend.single',['data'=>$data, 'relatedNews' => $relatedNews]);
     }
     
     public function searchContent(){
         print_r("works");
-        $url='http://127.0.0.1:8000/article';
+        $url=url('/article');
         $text = $_GET['value'];
         $dat = DB::table('posts')->where('title','LIKE','%'.$text.'%')->orwhere('description','LIKE','%'.$text.'%')->get();
         $output= '';

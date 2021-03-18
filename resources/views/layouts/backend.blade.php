@@ -20,7 +20,7 @@
 	<ul class="sidebar-menu">
 		<li><a href="{{route('dashboard')}}" class="dashboard"><i class="fa fa-tachometer"></i> <span>Dashboard</span></a></li>
 	  <li class="treeview">
-            <a href="{{url('http://127.0.0.1:8000')}}">
+            <a href="{{url('/')}}">
               <i class="fa fa-file"></i> <span>Home</span>
               
                 
@@ -29,28 +29,29 @@
       </li>
     <li class="treeview">
             <a href="#">
-              <i class="fa fa-bookmark-o"></i> <span>Posts</span>
+              <i class="fa fa-bookmark-o"></i> <span>Articles</span>
               <span class="pull-right-container">
                 <i class="fa fa-angle-left pull-right"></i>
               </span>
             </a>
             <ul class="treeview-menu">
-              <li><a href="{{url('all-posts')}}"><i class="fa fa-eye"></i>All Posts</a></li>
-              <li><a href="{{url('add-post')}}"><i class="fa fa-plus-circle"></i>Add Posts</a></li>
+              <li><a href="{{url('all-posts')}}"><i class="fa fa-eye"></i>Publications</a></li>
+              <li><a href="{{url('add-post')}}"><i class="fa fa-plus-circle"></i>Ajouter Article</a></li>
               <li><a href="{{route('viewCategory')}}"><i class="fa fa-plus-circle"></i>Categories</a></li>
+              <li><a href="{{route('viewSection')}}"><i class="fa fa-plus-circle"></i>Sections</a></li>
             </ul>
         </li>
         
         <li class="treeview">
             <a href="#">
-              <i class="fa fa-image"></i> <span>Advertisement</span>
+              <i class="fa fa-image"></i> <span>Publicité</span>
               <span class="pull-right-container">
                 <i class="fa fa-angle-left pull-right"></i>
               </span>
             </a>
             <ul class="treeview-menu">
-              <li><a href="{{url('all-advs')}}"><i class="fa fa-eye"></i>All Advs</a></li>
-              <li><a href="{{url('add-adv')}}"><i class="fa fa-plus-circle"></i>Add Adv</a></li>
+              <li><a href="{{url('all-advs')}}"><i class="fa fa-eye"></i>Publicités</a></li>
+              <li><a href="{{url('add-adv')}}"><i class="fa fa-plus-circle"></i>Ajouter Publicité</a></li>
             </ul>
         </li>
        
@@ -63,13 +64,14 @@
               </span>
             </a>
             <ul class="treeview-menu">
-                <li><a href="{{route('users')}}"><i class="fa fa-eye"></i>All Users</a></li>
-                <li><a href="#"><i class="fa fa-plus-circle"></i>Add Users</a></li>
+                <li><a href="{{route('subscribers')}}"><i class="fa fa-eye"></i>All Subscribers</a></li>
+                <li><a href="{{route('users')}}"><i class="fa fa-eye"></i>All Admins</a></li>
+                <li><a href="#"><i class="fa fa-plus-circle"></i>Add Admin</a></li>
             </ul>
         </li>
         <li class="treeview">
             <a href="#">
-              <i class="fa fa-address-book"></i> <span>Settings</span>
+              <i class="fa fa-address-book"></i> <span>Parametres</span>
               <span class="pull-right-container">
                 <i class="fa fa-angle-left pull-right"></i>
               </span>

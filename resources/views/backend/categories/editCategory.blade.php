@@ -28,6 +28,20 @@
 					<input type="text" name="slug" id="slug" class="form-control" readonly=""value="{{$singleData->slug}}">
 					<p>The “slug” is the URL-friendly version of the name. It is usually all lowercase and contains only letters, numbers, and hyphens.</p>
 				</div>
+
+                <div class="form-group">
+                	<label>Section</label>
+                    <select class="form-control" name="section" >
+                        <option value="{{$singleData->section}}">{{$singleData->section}}</option>
+
+                        @foreach($sections as $section)
+                        @if($singleData->section !== $section->title)
+                        <option value="{{$section->title}}">{{$section->title}}</option>
+                        @endif
+                        @endforeach
+                    </select>
+                </div>
+
                 <div class="form-group">
                 	<label>Status</label>
                     <select class="form-control" name="status" >

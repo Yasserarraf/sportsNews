@@ -4,7 +4,7 @@
 <div class="container-fluid">
   <div class="row">
     <div class="col-sm-12 title">
-      <h1><i class="fa fa-bars"></i> Add New Posts <a href="{{url('add-post')}}" class="btn btn-sm btn-default">Add New</a></h1>
+      <h1>Subscribers</h1>
     </div>
     <div class="col-sm-12">
     @if(Session::has('message'))
@@ -16,11 +16,11 @@
     </div>
     <div class="search-div">
       <div class="col-sm-9">
-        All({{$allposts}}) | <a href="#">Published ({{$published}})</a>
+        
       </div>
 
       <div class="col-sm-3">
-        <input type="text" id="search" name="search" class="form-control" placeholder="Search Posts">
+        <input type="text" id="search" name="search" class="form-control" placeholder="Search Subscriber">
       </div>
     </div>
 
@@ -28,8 +28,8 @@
     <form method="post" action="{{url('multipledelete')}}">
     <div class="filter-div">
       {{csrf_field()}}
-      <input type="hidden" name="tbl" value="{{encrypt('posts')}}">
-      <input type="hidden" name="tblid" value="{{encrypt('pid')}}">
+      <input type="hidden" name="tbl" value="{{encrypt('subscribers')}}">
+      <input type="hidden" name="tblid" value="{{encrypt('sid')}}">
       <div class="col-sm-2">
           <select name="bulk-action" class="form-control">
             <option value="0">Bulk Action</option>
@@ -42,9 +42,7 @@
           </div>
         </div>
         <div class="filter-div">
-      <div class="col-sm-3">
-        {{$posts->links()}}
-      </div>
+      
     </div>
     <div class="col-sm-12" ></div>
 
@@ -53,28 +51,24 @@
         <table class="table table-striped" id="myTable">
           <thead>
             <tr>
-              <th width="50%"><input type="checkbox" id="select-all"> Title</th>
-              <th width="15%">Category</th>
-              <th width="15%">Statue</th>
+              <th width="50%"><input type="checkbox" id="select-all"> Email</th>
               <th width="10%">Date</th>
             </tr>
           </thead>
           <tbody>
-            @if(count($posts)>0)
-            @foreach($posts as $post)
+            @if(count($subscribers)>0)
+            @foreach($subscribers as $subscriber)
             <tr>
               <td>
-                <input type="checkbox" name="select-data[]" value="{{$post->pid}}">
-                <a href="{{url('editpost')}}/{{$post->pid}}">{{$post->title}}</a>
+                <input type="checkbox" name="select-data[]" value="{{$subscriber->sid}}">
+                <a href="{{url('editpost')}}/{{$subscriber->sid}}">{{$subscriber->email}}</a>
               </td>
-              <td>{{$post->category_id}}</td>
-              <td>{{$post->status}}</td>
-              <td>{{$post->created_at}}</td>
+              <td>{{$subscriber->created_at}}</td>
             </tr>
             @endforeach
             @else
             <tr>
-              <td colspan="4">No posts Found. </td>
+              <td colspan="4">No Subscriber Found. </td>
              </tr>
             @endif
           </tbody>
@@ -89,7 +83,7 @@
     </form>
   </div>
   <div >
-		{{ $posts->links('pagination::bootstrap-4')}}
+		{{ $subscribers->links('pagination::bootstrap-4')}}
 	</div>
 </div>
 

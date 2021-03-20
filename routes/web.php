@@ -39,7 +39,7 @@ Route::post('addCategory', [categoryController::class,'insertData'])->name('addC
 
 Route::get('editCategory/{id}', [adminController::class,'editCategory'])->name('editCategory');
 
-Route::post('updateCategory/{id}', [categoryController::class,'updateCategory'])->name('updateCategory');
+Route::post('updateCategory/{id}', [CrudController::class,'updateData'])->name('updateCategory');
 
 Route::post('multipleDelete', [adminController::class,'multipleDelete'])->name('multipleDelete');
 
@@ -82,6 +82,21 @@ Route::get('/privacy',function(){
 
 //advertisement
 
+Route::get('add-adv', [adminController::class,'addAdv'])->name('addAdv');
+Route::post('addadv', [crudController::class,'insertData']);
+Route::get('all-advs', [adminController::class,'allAdv'])->name('allAdv');
+Route::get('editadv/{id}', [adminController::class,'editAdv'])->name('editAdv');
+Route::post('updateadv/{id}', [crudController::class,'updateData'])->name('updateAdv');
+Route::get('search-content',[frontController::class,'searchContent'])->name('search-content');
+
+
+//subscribe
+
+Route::get('/subscribers',[adminController::class,'getSubscribers'])->name('subscribers');
+Route::post('subscribe', [crudController::class,'subscribe'])->name('subscribe');
+
+//auth
+
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
@@ -90,27 +105,6 @@ Route::get('logout',function(){
     Auth::logout();
     return redirect('/login');
 })->name('logout');
-
-Route::get('add-adv', [adminController::class,'addAdv'])->name('addAdv');
-Route::post('addadv', [crudController::class,'insertData']);
-Route::get('all-advs', [adminController::class,'allAdv'])->name('allAdv');
-Route::get('editadv/{id}', [adminController::class,'editAdv'])->name('editAdv');
-Route::post('updateadv/{id}', [crudController::class,'updateAdv'])->name('updateAdv');
-Route::get('search-content',[frontController::class,'searchContent'])->name('search-content');
-
-
-//notification system
-Route::get('email',function(){
-    Mail::to('yasserarraf012@gmail.com')->send(new NotificationSystem());
-    return new NotificationSystem();
-});
-
-//subscribe
-
-Route::get('/subscribers',[adminController::class,'getSubscribers'])->name('subscribers');
-Route::post('subscribe', [crudController::class,'subscribe'])->name('subscribe');
-
-//auth
 
 Route::get('/register',function(){
     if(DB::table('users')->count() <= 0){
@@ -122,4 +116,3 @@ Route::get('/register',function(){
 
 Route::get('register-admin',[adminController::class,'addAdmin'])->name('registerAdmin');
 Route::post('addadmin', [crudController::class,'addAdmin'])->name('addAdmin');
-Route::post('subscribe', [crudController::class,'subscribe'])->name('subscribe');

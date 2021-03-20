@@ -17,6 +17,7 @@
 			<form method="post" action="{{route('updateCategory',['id'=>$singleData->cid])}}">
 				@csrf
                 <input type="hidden" name="tbl" value="{{encrypt('categories')}}" >
+                <input type="hidden" name="tblId" value="{{encrypt('cid')}}" >
                 <div class="form-group">
 					<label>Name</label>
 					<input type="text" name="title" id="category_name" class="form-control" value="{{$singleData->title}}">

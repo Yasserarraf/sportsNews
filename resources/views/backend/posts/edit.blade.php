@@ -19,7 +19,7 @@
 				<form method="post" action="{{url('updatepost')}}/{{$data->pid}}" enctype="multipart/form-data" >
 				    {{csrf_field()}}
 					<input type="hidden" name="tbl" value="{{encrypt('posts')}}">
-          <input type="hidden" name="pid" value="{{$data->pid}}">
+					<input type="hidden" name="tblId" value="{{encrypt('pid')}}">
 					<div class="col-sm-9">
 						<div class="form-group">
 						    <label>Title </label>	
@@ -91,5 +91,23 @@
     image.src=URL.createObjectURL(event.target.files[0]);
   };
   </script>
+  <script>
+        
+        var title = document.getElementById('post_title');
+        var slug = document.getElementById('slug');
+        title.addEventListener('input', (e) => {
+            slug.value = slugify(e.target.value);
+        });
+
+        function slugify(text) {
+            return text.toString()
+                .toLowerCase()
+                .replace(/\s+/g, '-')           // Replace spaces with -
+                .replace(/[^\w\u0621-\u064A\-]+/g, '')       // Remove all non-word chars
+                .replace(/\-\-+/g, '-')         // Replace multiple - with single -
+                .replace(/^-+/, '')             // Trim - from start of text
+                .replace(/-+$/, '');            // Trim - from end of text
+        }
+    </script>
 
 @stop

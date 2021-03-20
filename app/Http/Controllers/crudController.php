@@ -55,6 +55,7 @@ class crudController extends Controller
     public function updateData(Request $request,$id){
         $data = $request->except(['_token']);
         $tbl = decrypt($data['tbl']);
+        $tblId = decrypt($data['tblId']);
         $data['updated_at'] = date('Y-m-d H:i:s');
 
         if($request->has('social')){
@@ -65,50 +66,18 @@ class crudController extends Controller
             $data['image'] = $this->uploadImage($tbl, $data['image']);
         }
 
+        if($request->has('category_id')){
+            $data['category_id'] = implode(',', $data['category_id']);
+        }
+
         unset($data['tbl']);
-        DB::table($tbl)->where('sid',$id)->update($data);
+        unset($data['tblId']);
+        
+        DB::table($tbl)->where($tblId,$id)->update($data);
         session::flash('message','Data updated successfully');
         return redirect()->back();
     }
     
-    public function updateData2(Request $request,$id){
-        $data = $request->except(['_token']);
-        $tbl = decrypt($data['tbl']);
-        $data['updated_at'] = date('Y-m-d H:i:s');
-
-        if($request->has('social')){
-            $data['social'] = implode(',', $data['social']);
-        }
-
-        if($request->hasFile('image')){
-            $data['image'] = $this->uploadImage($tbl, $data['image']);
-        }
-
-        unset($data['tbl']);
-        DB::table($tbl)->where('sid',$id)->update($data);
-        session::flash('message','Data updated successfully');
-        return redirect()->back();
-    }
-
-    public function updateAdv(Request $request,$id){
-        $data = $request->except(['_token']);
-        $tbl = decrypt($data['tbl']);
-
-        if($request->has('social')){
-            $data['social'] = implode(',', $data['social']);
-        }
-
-        if($request->hasFile('image')){
-            $data['image'] = $this->uploadImage($tbl, $data['image']);
-        }
-
-        unset($data['tbl']);
-        $data['created_at'] = date('Y-m-d H:i:s');
-        DB::table($tbl)->where('aid',$id)->update($data);
-        session::flash('message','Data updated successfully');
-        return redirect()->back();
-    }
-
     public function subscribe(Request $request){
         $message = '';
         if (!filter_var($request->email, FILTER_VALIDATE_EMAIL)) {

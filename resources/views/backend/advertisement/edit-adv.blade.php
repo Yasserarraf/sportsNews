@@ -19,6 +19,7 @@
 				<form method="post" action="{{url('updateadv')}}/{{$data->aid}}" enctype="multipart/form-data" >
 				    {{csrf_field()}}
 					<input type="hidden" name="tbl" value="{{encrypt('advertisements')}}">
+					<input type="hidden" name="tblId" value="{{encrypt('aid')}}">
 					<input type="hidden" name="aid" value="{{$data->aid}}">
 					<div class="col-sm-12">
 						<div class="form-group">	

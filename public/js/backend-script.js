@@ -16,7 +16,7 @@ $(document).ready(function () {
 	function slugify(text) {
 		return text.toString().toLowerCase()
 			.replace(/\s+/g, '-')           // Replace spaces with -
-			.replace(/[^\w\-]+/g, '')       // Remove all non-word chars
+			.replace(/[^\w\u0621-\u064A\-]+/g, '')       // Remove all non-word chars
 			.replace(/\-\-+/g, '-')         // Replace multiple - with single -
 			.replace(/^-+/, '')             // Trim - from start of text
 			.replace(/-+$/, '');            // Trim - from end of text
@@ -39,7 +39,7 @@ $(document).ready(function () {
 		}
 	});
 
-	var list = document.getElementById("my-ui-list");
-	Sortable.create(list);
+	/*var list = document.getElementById("my-ui-list");
+	Sortable.create(list);*/
 
 });

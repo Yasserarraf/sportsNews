@@ -69,7 +69,7 @@
 			<form method="post" action="{{url('updateSettings')}}/{{$data->sid}}" enctype="multipart/form-data">
 				@csrf
 				<input type="hidden" name="tbl" value="{{encrypt('settings')}}" />
-				<input type="hidden" name="sid" value="{{$data->sid}}" />
+				<input type="hidden" name="tblId" value="{{encrypt('sid')}}" />
                 <div class="form-group">
 					<label>Logo</label>
 					@if(!empty($data->image))

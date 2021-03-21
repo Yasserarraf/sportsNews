@@ -8,7 +8,8 @@
 			@foreach($latest as $post)
 			<div class="media">
 				<div class="media-left">
-					<a href="{{url('article')}}/{{$post->slug}}"><img class="media-object" src="{{url('posts')}}/{{$post->image}}" width="70px" alt="Generic placeholder image"></a>
+					<a href="{{url('article')}}/{{$post->slug}}"><img class="media-object" src="{{url('posts')}}/{{$post->image}}"
+					 style="width:70px;height:70px;object-fit:cover;" alt="image"></a>
 				</div><!--media-left-->
 				<div class="media-body">
 					<h4 class="media-heading"><a href="{{url('article')}}/{{$post->slug}}">{{$post->title}}</a></h4>

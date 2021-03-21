@@ -25,19 +25,30 @@
             </a>
       </li>
     <li class="treeview">
-            <a href="#">
-              <i class="fa fa-bookmark-o"></i> <span>Articles</span>
-              <span class="pull-right-container">
-                <i class="fa fa-angle-left pull-right"></i>
-              </span>
-            </a>
-            <ul class="treeview-menu">
-              <li><a href="{{url('all-posts')}}"><i class="fa fa-eye"></i>Publications</a></li>
-              <li><a href="{{url('add-post')}}"><i class="fa fa-plus-circle"></i>Ajouter Article</a></li>
-              <li><a href="{{route('viewCategory')}}"><i class="fa fa-plus-circle"></i>Categories</a></li>
-              <li><a href="{{route('viewSection')}}"><i class="fa fa-plus-circle"></i>Sections</a></li>
-            </ul>
-        </li>
+        <a href="#">
+          <i class="fa fa-bookmark-o"></i> <span>Articles</span>
+          <span class="pull-right-container">
+            <i class="fa fa-angle-left pull-right"></i>
+          </span>
+        </a>
+        <ul class="treeview-menu">
+          <li><a href="{{url('all-posts')}}"><i class="fa fa-eye"></i>Publications</a></li>
+          <li><a href="{{url('add-post')}}"><i class="fa fa-plus-circle"></i>Ajouter Article</a></li>
+        </ul>
+    </li>
+
+    <li class="treeview">
+        <a href="#">
+          <i class="fa fa-bookmark-o"></i> <span>Cathegories</span>
+          <span class="pull-right-container">
+            <i class="fa fa-angle-left pull-right"></i>
+          </span>
+        </a>
+        <ul class="treeview-menu">
+          <li><a href="{{route('viewSection')}}"><i class="fa fa-plus-circle"></i>Sections</a></li>
+          <li><a href="{{route('viewCategory')}}"><i class="fa fa-plus-circle"></i>Categories</a></li>
+        </ul>
+    </li>
         
         <li class="treeview">
             <a href="#">

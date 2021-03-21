@@ -13,13 +13,13 @@
 		</script>
 		
 		@foreach($posts as $post)
-		<div class="col-md-6 mt-3" >
+		<div class="col-md-6 mt-3" style="margin-bottom: 30px;" >
 			<div class="feature_news_item">
 				<div class="item">
 					<div class="item_wrapper">
 						<div class="item_img">
 							<a href="{{url('article')}}/{{$post->slug}}">
-								<img class="img-responsive"  style="width:100%;" src="{{url('posts')}}/{{$post->image}}" alt="img">
+								<img class="img-responsive"  style="width:100%;height:250px;object-fit:cover;" src="{{url('posts')}}/{{$post->image}}" alt="img">
 							</a>
 						</div> <!--item_img-->
 						<div class="item_title_date"  >
@@ -29,7 +29,7 @@
 						</div><!--item_title_date-->
 					</div> <!--item_wrapper-->
 					<div class="item_meta">{{$post->created_at}}</a></div>
-					<div class="item_content" id="{{$post->pid}}" data-content-desc="{{$post->description}}">
+					<div class="item_content" id="{{$post->pid}}" data-content-desc="{{$post->description}}" style="height: 100px">
 						
 					</div>
 
